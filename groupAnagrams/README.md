@@ -161,7 +161,12 @@
    	哈希表的键是把单词字母排序得到的字符串，而值为一组变位词
     	public List<List<String>> groupAnagrams(String[] strs){
      		Map<String,List<String>> groups=new HashMap<>();
-       		
+       		for(String str:strs){
+	 		char[] charArray=str.toCharArray();
+    			Arrays.sort(charArray);
+       			String sorted=new String(charArray);
+	  		groups.putIfAbsent(sorted,new LinkedList<String>)();
+     			groups.get(sorted).add(str);
 	}
 
 https://blog.csdn.net/weixin_43244698/article/details/106675167
