@@ -160,10 +160,15 @@
   	eg.把“eat”、“tea”、“ate”的字母执照字母表排序都得到字符串“aet”
    	哈希表的键是把单词字母排序得到的字符串，而值为一组变位词
     	public List<List<String>> groupAnagrams(String[] strs){
+     		//创建一个HashMap，key为排序好的字符串，value为变位词组
      		Map<String,List<String>> groups=new HashMap<>();
+       		//遍历字符串数组中的字符串
        		for(String str:strs){
+	 		//将字符转换成字符数组为了后面给字符串中的字母排序用
 	 		char[] charArray=str.toCharArray();
+    			//对字符串中的字母进行排序
     			Arrays.sort(charArray);
+       			//利用String的构造函数将，字符数组转换成字符串
        			String sorted=new String(charArray);
 	  		groups.putIfAbsent(sorted,new LinkedList<String>)();
      			groups.get(sorted).add(str);
