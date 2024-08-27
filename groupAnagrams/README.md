@@ -156,6 +156,14 @@
        	Collection<V> 	values()
       	Returns a Collection view of the values contained in this map.
 
+ 	解法二：把一组变位词映射到同一个单词
+  	eg.把“eat”、“tea”、“ate”的字母执照字母表排序都得到字符串“aet”
+   	哈希表的键是把单词字母排序得到的字符串，而值为一组变位词
+    	public List<List<String>> groupAnagrams(String[] strs){
+     		Map<String,List<String>> groups=new HashMap<>();
+       		
+	}
+
 https://blog.csdn.net/weixin_43244698/article/details/106675167
 
 
