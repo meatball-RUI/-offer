@@ -35,6 +35,22 @@
         		return  (List<List<String>>) groups.values();
         	}
         }
+
+	public class Main {
+	
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+			GroupAnagrams ga=new GroupAnagrams();
+			String[] input={"eat", "tea", "tan", "ate", "nat", "bat"};
+			System.out.print(ga.groupAnagrams1(input));
+			//为什么只能是ga.groupAnagrams1(input)调用;
+			//不能是ga.groupAnagrams1({"eat", "tea", "tan", "ate", "nat", "bat"})调用
+			//1.因为如果实参是基本类型（包括包装类型）或者String，则实参不会变（传的是值）
+			//2.如果实参是对象集合或者数组，则实参会改变（传的是引用）	
+		}
+	
+	}
+
         此时会报错：
         Exception in thread "main" java.lang.ClassCastException: class java.util.HashMap$Values cannot be cast to class                        java.util.List (java.util.HashMap$Values and java.util.List are in module java.base of loader 'bootstrap')
 	      at offer33.GroupAnagrams.groupAnagrams1(GroupAnagrams.java:25)
@@ -65,8 +81,63 @@
 				ArrayList(int initialCapacity)
 				Constructs an empty list with the specified initial capacity.
     				构造一个包含指定集合的​​元素的列表，按照集合迭代器返回的顺序排列它们。
-    			会发现这两个构造函数LinkedList(Collection<? extends E> c) ArrayList(Collection<? extends E> c)的作用是一样的。
+    				会发现这两个构造函数LinkedList(Collection<? extends E> c) ArrayList(Collection<? extends E> c)的作用
+	                        是一样的。
+       				return  new ArrayList<>(groups.values());的执行
+					import java.util.ArrayList;
+					import java.util.HashMap;
+					import java.util.LinkedList;
+					import java.util.List;
+					
+					public class GroupAnagrams {
+						//如果输入n个单词，平均每个单词由m个字母，那么第一种思路的时间复杂度是O(mn)
+						public  List<List<String>> groupAnagrams1(String[] strs){
+							int[] hash= {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101};
+							HashMap<Long,List<String>> groups=new HashMap<>();
+							for(String str:strs) {
+								long wordHash=1;
+								for(int i=0;i<str.length();i++) {
+									wordHash *=hash[str.charAt(i)-'a'];
+								}
+								//put与putIfAbsent区别：
+								//put在放入数据时，如果放入数据的key已经存在于Map中，最后放入的数据会覆盖之前存在的数据，
+								//而putIfAbsent在放入数据时，如果存在重复的key,那么putIfAbsent不会放入值
+								groups.putIfAbsent(wordHash, new LinkedList<String>());
+								groups.get(wordHash).add(str);
+							}
+					//		return new LinkedList<>(groups.values());
+							return  new ArrayList<>(groups.values());
+						}
+					}
+     				结果：[[eat, tea, ate], [tan, nat], [bat]]
 
+	  			return new LinkedList<>(groups.values());的执行
+				import java.util.ArrayList;
+				import java.util.HashMap;
+				import java.util.LinkedList;
+				import java.util.List;
+				
+				public class GroupAnagrams {
+					//如果输入n个单词，平均每个单词由m个字母，那么第一种思路的时间复杂度是O(mn)
+					public  List<List<String>> groupAnagrams1(String[] strs){
+						int[] hash= {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101};
+						HashMap<Long,List<String>> groups=new HashMap<>();
+						for(String str:strs) {
+							long wordHash=1;
+							for(int i=0;i<str.length();i++) {
+								wordHash *=hash[str.charAt(i)-'a'];
+							}
+							//put与putIfAbsent区别：
+							//put在放入数据时，如果放入数据的key已经存在于Map中，最后放入的数据会覆盖之前存在的数据，
+							//而putIfAbsent在放入数据时，如果存在重复的key,那么putIfAbsent不会放入值
+							groups.putIfAbsent(wordHash, new LinkedList<String>());
+							groups.get(wordHash).add(str);
+						}
+						return new LinkedList<>(groups.values());
+				//		return  new ArrayList<>(groups.values());
+					}
+				}
+    				结果：[[eat, tea, ate], [tan, nat], [bat]]
        这边对HashMap.values不是很了解
        Constructor in HashMap
        Constructor and Description
@@ -78,9 +149,8 @@
         Constructs an empty HashMap with the specified initial capacity and load factor.
         HashMap(Map<? extends K,? extends V> m)
         Constructs a new HashMap with the same mappings as the specified Map.
-
-       Collection<V> 	values()
-      Returns a Collection view of the values contained in this map.
+       	Collection<V> 	values()
+      	Returns a Collection view of the values contained in this map.
 
 https://blog.csdn.net/weixin_43244698/article/details/106675167
 
