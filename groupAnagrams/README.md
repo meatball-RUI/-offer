@@ -18,10 +18,14 @@
         public class GroupAnagrams {
         	//如果输入n个单词，平均每个单词由m个字母，那么第一种思路的时间复杂度是O(mn)
         	public  List<List<String>> groupAnagrams1(String[] strs){
+	 		//创建一个对应26个英文字母的质数数组
         		int[] hash= {2,3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97,101};
+	  		//创建一个key为质数乘积，value为变位词组的list的HashMap
         		HashMap<Long,List<String>> groups=new HashMap<>();
+	  		//遍历strs数组
         		for(String str:strs) {
         			long wordHash=1;
+	   			//遍历每个单词求其质数乘积
         			for(int i=0;i<str.length();i++) {
         				wordHash *=hash[str.charAt(i)-'a'];
         			}
