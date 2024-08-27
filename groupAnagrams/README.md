@@ -39,6 +39,34 @@
         Exception in thread "main" java.lang.ClassCastException: class java.util.HashMap$Values cannot be cast to class                        java.util.List (java.util.HashMap$Values and java.util.List are in module java.base of loader 'bootstrap')
 	      at offer33.GroupAnagrams.groupAnagrams1(GroupAnagrams.java:25)
 	      at offer33.Main.main(Main.java:9)
+       	来自stackOverflow上的解释：
+	Explanation
+ 	Because HashMap#values() returns a java.util.Collection<V> and you can't cast a Collection into an ArrayList, thus you get 	ClassCastException.
+  	因为HashMap的values方法返回的是一个Collection，没办法直接将一个Collection转成ArrayList，所以同理这边我们也没办法直接将一个Collection转成List
+
+	I'd suggest using ArrayList(Collection<? extends V>) constructor. This constructor accepts an object which implements 		Collection<? extends V> as an argument. You won't get ClassCastException when you pass the result of HashMap.values() like 	this:
+	List<V> al = new ArrayList<V>(hashMapVar.values());
+ 	使用可以接收Collection的ArrayList的构造函数可以解决这个问题，同理我们可以new一个List的子类来解决这个问题.
+  	那么List的子类是用LinkedList还是ArrayList？
+   		看一下LinkedList跟ArrayList的Constructor
+     			LinkedList：
+				Constructors Constructor and Description
+				LinkedList()
+				Constructs an empty list.
+				LinkedList(Collection<? extends E> c)
+				Constructs a list containing the elements of the specified collection, in the order they are 					returned by the collection's iterator.
+                                构造一个包含指定集合的​​元素的列表，按照集合迭代器返回的顺序排列它们。
+    			ArrayList：
+       				Constructors Constructor and Description
+				ArrayList()
+				Constructs an empty list with an initial capacity of ten.
+				ArrayList(Collection<? extends E> c)
+				Constructs a list containing the elements of the specified collection, in the order they are 					returned by the collection's iterator.
+				ArrayList(int initialCapacity)
+				Constructs an empty list with the specified initial capacity.
+    				构造一个包含指定集合的​​元素的列表，按照集合迭代器返回的顺序排列它们。
+    			会发现这两个构造函数LinkedList(Collection<? extends E> c) ArrayList(Collection<? extends E> c)的作用是一样的。
+
        这边对HashMap.values不是很了解
        Constructor in HashMap
        Constructor and Description
