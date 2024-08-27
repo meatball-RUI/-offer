@@ -168,7 +168,8 @@
 	  		groups.putIfAbsent(sorted,new LinkedList<String>)();
      			groups.get(sorted).add(str);
 	}
-
+ 	return new LinkedList<>(groups.values());
+}
 https://blog.csdn.net/weixin_43244698/article/details/106675167
 
 
