@@ -170,6 +170,16 @@
 	}
  	return new LinkedList<>(groups.values());
 }
+	不太懂的：
+ 	Arrays.sort():
+  	static void        sort(char[] a)
+   			   Sorts the specified range of the array into ascending order 
+	 String sorted=new String(charArray):
+  	 用这个构造函数可以把这个字符串数组变成字符串
+         String(char[] value)
+         Allocates a new String so that it represents the sequence of characters currently contained in the character array argument.
+
+   
 https://blog.csdn.net/weixin_43244698/article/details/106675167
 
 
