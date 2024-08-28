@@ -61,3 +61,61 @@ private boolean isSorted(String word1,String word2,int[] order){
 ##时间空间复杂度
 时间复杂度：O（n），n为字符串数组的个数
 空间复杂度：O(n),n为外星文字母表长度
+##执行
+```java
+package offer34;
+
+public class Solution {
+	public boolean isAlienSorted(String[] strs,String alien) {
+		int[] array=new int[alien.length()];
+		for(int i=0;i<alien.length();++i) {
+			array[alien.charAt(i)-'a']=i;
+//			System.out.print(array[alien.charAt(i)-'a']);
+		}
+		for(int i=0;i<strs.length-1;++i) {
+			if(!isSorted(strs[i],strs[i+1],array)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean isSorted(String word1, String word2, int[] array) {
+		// TODO Auto-generated method stub
+		int i=0;
+		for(;i<word1.length()&&i<word2.length();++i) {
+			int char1=array[word1.charAt(i)-'a'];
+			int char2=array[word2.charAt(i)-'a'];
+			if(char1<char2) {
+				return true;
+			}
+			if(char1>char2) {
+				return false;
+			}
+		}
+		return i==word1.length();
+	}
+}
+package offer34;
+
+import java.util.Random;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Solution s=new Solution();
+		String[] strs= {"aab","aaa","a"};
+		String[] strs1= {"aaa","aab","a"};
+		String[] strs2= {"a","aab","aaa"};
+		String alien="zyxwvutsrqponmlkjihgfedcaba";
+		System.out.println(s.isAlienSorted(strs, alien));
+		System.out.println(s.isAlienSorted(strs1, alien));
+		System.out.println(s.isAlienSorted(strs2, alien));
+	}
+
+}
+```
+###执行结果
+false
+false
+true
