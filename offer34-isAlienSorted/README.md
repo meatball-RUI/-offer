@@ -58,9 +58,8 @@ private boolean isSorted(String word1,String word2,int[] order){
     return i==word1.length();
 }
 ```
-##时间空间复杂度
-时间复杂度：O（n），n为字符串数组的个数
-空间复杂度：O(n),n为外星文字母表长度
+##时间空间复杂度  
+如果输入n个单词，每个单词的平均长度为m，那么该算法的时间复杂度是O(mn),空间复杂度是O（1）。
 ##执行
 ```java
 package offer34;
