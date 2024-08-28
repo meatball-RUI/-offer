@@ -10,7 +10,7 @@
     
 
     解法一：将每个英文小写字母映射到一个质数，比较质数乘积
-    	```Java
+    	```java
     	import java.util.HashMap;
         import java.util.LinkedList;
         import java.util.List;
