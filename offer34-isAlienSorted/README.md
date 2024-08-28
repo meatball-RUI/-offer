@@ -58,3 +58,6 @@ private boolean isSorted(String word1,String word2,int[] order){
     return i==word1.length();
 }
 ```
+##时间空间复杂度
+时间复杂度：O（n），n为字符串数组的个数
+空间复杂度：O(1),只用到了一个长度为26的常数大小的数组
