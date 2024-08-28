@@ -19,6 +19,7 @@ eg.一组单词["offer","is","coming"]，字母表顺序"zyxwvutsrqponmlkjihgfed
 </div>
 
 ```java
+//创建一个字母表用来判断一个单词是否按外星人字母表排序
 public boolean is AlienSorted(String[] words,String order){
   int[] orderArray=new int[order.length()];
   for(int i=0;i<order.length();++i){
