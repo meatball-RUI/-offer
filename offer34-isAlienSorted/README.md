@@ -37,7 +37,7 @@ public boolean isAlienSorted(String[] words,String order){
 }
 //创建一个方法用来判断两个单词是否符合外星人字母表排序
 private boolean isSorted(String word1,String word2,int[] order){
-  //?现在不清楚为什么i=0不在for循环里面
+  //?现在不清楚为什么i=0不在for循环里面--后续，现在知道为什么i=0在for循环里了，因为这个i的变量后面还是要被用到
   int i=0;
   //遍历两个单词中的比较短的单词的长度
   for(;i<word1.length()&&i<word2.length();++i){
@@ -45,14 +45,16 @@ private boolean isSorted(String word1,String word2,int[] order){
     char ch1=word1.charAt(i);
     //获取第二个单词中的第i个字符
     char ch2=word2.charAt(i);
-    //
+    //在没有比完的情况下，word1中只要出现了比word2小的就是符合条件的
     if(order[ch1-'a']<order[ch2-'a']){
       return true;
     }
+    //在没有比完的情况下，word1中只要出现了比word2小的就不符合条件
     if(order[ch1-'a']>order[ch2-'a']){
       return false;
     }
   }
+    //如果前面比较的所有的单词一样，那么word1比较短的话就会符合条件
     return i==word1.length();
 }
 ```
