@@ -10,8 +10,8 @@
     
 
     解法一：将每个英文小写字母映射到一个质数，比较质数乘积
-    
-        import java.util.HashMap;
+    	```Java
+    	import java.util.HashMap;
         import java.util.LinkedList;
         import java.util.List;
         
@@ -54,6 +54,7 @@
 		}
 	
 	}
+ 	```
 
         此时会报错：
         Exception in thread "main" java.lang.ClassCastException: class java.util.HashMap$Values cannot be cast to class                        java.util.List (java.util.HashMap$Values and java.util.List are in module java.base of loader 'bootstrap')
