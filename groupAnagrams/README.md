@@ -214,11 +214,52 @@ public class GroupAnagrams1 {
 		return new LinkedList<>(map.values());
 	}
 }
+结果：
+the word is:[C@1c655221
+the word is:[C@6996db8
+the word is:[C@1963006a
+the word is:[C@7fbe847c
+the word is:[C@41975e01
+the word is:[C@c2e1f26
+[[cab], [caa], [a], [aac], [abc], [cba]]
+the word is:[C@7dc5e7b4
+[[]]
+the word is:[C@1ee0005
+[[aa]]
 错的点：将字符数组转成String不是用的toString的方法，是用的String的构造函数
 String word=hashword.toString();
 System.out.println("the word is:"+word);
 
 String的构造函数
+String(char[] value)
+Allocates a new String so that it represents the sequence of characters currently contained in the character array argument.
+
+toString方法
+Java toString() Method
+If you want to represent any object as a string, to String() method comes into existence.
+The toString method returns the String representation of the object.
+If you print any object, Java compiler internally invokes the toString() method on the object. So overriding the toString() method, returns the desired output, it can be the state of an object etc. depending on your implementation.
+Advantage of Java toString() method
+By overriding the toString() method of the Object class, we can return values of the object, so we don't need to write much code.
+Understanding problem without toString() method
+Let's see the simple code that prints reference.
+Student.java
+class Student{
+	int rollno;
+ 	String name;
+  	String city;
+   	Student(int rollno, String name, String city){
+    		this.rollno=rollno;
+      		this.name=name;
+		this.city=city;
+	}
+ 	public static void main(String args[]){
+  		Student s1=new Student(101,"Raj","lucknow");
+    		Student s2=new Student(102,"Vijay","ghaziabad");
+      		System.out.println(s1);//compiler writes here s1.toString()
+		System.out.println(s2);
+	}
+}
 
    
 https://blog.csdn.net/weixin_43244698/article/details/106675167
