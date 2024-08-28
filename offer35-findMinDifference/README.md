@@ -15,14 +15,5 @@ eg.输入时间组["23:50","23:59","00:00"]，输出为1.
 用数组模拟一个键为时间、值为true或false的哈希表。  
 可以用数组模拟哈希表的原因是一天的分钟数是已知的，而且数组的长度为1440，也不算太长。有了这个数组，就可以和用哈希表一样，在O（1）的时间知道每个时间是否出现在输入的时间数组中。
 ```java
-public int findMinDifference(){
-  if(timePoints.size()>1440){
-    return 0;
-  }
-  boolean minuteFlags[] = new boolean[1440];
-  for(String time: timePoints){
-    String t[]=time.split(":");
-    int min=Integer.parseInt(t[0]*60+Integer.parseInt(t[1]));
-  }
-}
+
 ```
