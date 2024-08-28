@@ -257,8 +257,38 @@ class Student{
   		Student s1=new Student(101,"Raj","lucknow");
     		Student s2=new Student(102,"Vijay","ghaziabad");
       		System.out.println(s1);//compiler writes here s1.toString()
-		System.out.println(s2);
+		System.out.println(s2);//compiler writes here s2.toString()
 	}
+}
+Output:
+
+Student@1fee6fc
+Student@1eed786
+
+As you can see in the above example, printing s1 and s2 prints the hashcode values of the objects but I want to print the values of these objects.Since Java compiler internally calls toString()
+
+Example of Java toString() method
+Let's see an example of toString() method
+Student.java
+class Student{
+int rollno;
+String name;
+String city;
+Student(int rollno,String name,String city){
+	this.rollno=rollno;
+ 	this.name=name;
+  	this.city=city;
+}
+public String toString(){
+	//overriding the toString() method
+ 	return rollno+" "+name+" "+city;
+}
+public static void main(String args[]){
+	Student s1=new Student(101,"Raj","lucknow");
+ 	Student s2=new Student(102,"Vijay","ghaziabad");
+  	System.out.println(s1); //compiler writes here s1.toString();
+   	System.out.println(s2);//compiler writes here s2.toString();
+}
 }
 
    
