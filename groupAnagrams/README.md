@@ -170,19 +170,55 @@
     			Arrays.sort(charArray);
        			//利用String的构造函数将，字符数组转换成字符串
        			String sorted=new String(charArray);
+	  		如果sorted不存在的话，创建一个以sorted为key的键值对
 	  		groups.putIfAbsent(sorted,new LinkedList<String>)();
+     			将符合条件的单词跟sorted映射
      			groups.get(sorted).add(str);
 	}
+ 	//利用LinkedList构造函数构造一个包含指定集合的​​元素的列表，按照集合迭代器返回的顺序排列它们。
  	return new LinkedList<>(groups.values());
 }
-	不太懂的：
+	
+ 	不太懂的：
+        Arrays.sort(charArray);
+	通过Arrays.sort可以将字符串数组升序排序
  	Arrays.sort():
   	static void        sort(char[] a)
    			   Sorts the specified range of the array into ascending order 
+	 
 	 String sorted=new String(charArray):
   	 用这个构造函数可以把这个字符串数组变成字符串
          String(char[] value)
          Allocates a new String so that it represents the sequence of characters currently contained in the character array argument.
+
+错题集：
+package offer33;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+public class GroupAnagrams1 {
+	public List<List<String>> groupAnagrams1(String[] strs){
+		Map<String,List<String>> map=new HashMap<String,List<String>>();
+		for(String str:strs) {
+			char[] hashword=str.toCharArray();
+			Arrays.sort(hashword);
+			String word=hashword.toString();
+			//System.out.println("the word is:"+word);
+			map.put(word, new LinkedList<String>());
+			map.get(word).add(str);
+		}
+		return new LinkedList<>(map.values());
+	}
+}
+错的点：将字符数组转成String不是用的toString的方法，是用的String的构造函数
+String word=hashword.toString();
+System.out.println("the word is:"+word);
+
+String的构造函数
 
    
 https://blog.csdn.net/weixin_43244698/article/details/106675167
