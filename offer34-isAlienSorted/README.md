@@ -7,7 +7,6 @@ eg.一组单词["offer","is","coming"]，字母表顺序"zyxwvutsrqponmlkjihgfed
 
 思路：
   创建一个哈希表，哈希表的键为字母表的每个字母，而值为字母在字母表中的顺序。这个可以方便查找每个字母在字母表中的顺序。
-  key
   用一个长度为26的数组来模拟哈希表，可以精简代码
 <div align="left">
 
@@ -17,3 +16,8 @@ eg.一组单词["offer","is","coming"]，字母表顺序"zyxwvutsrqponmlkjihgfed
 | y   | 1   |
 | ...   | ...  |
 </div>
+
+```java
+public boolean is AlienSorted(String[] words,String order){
+}
+```
