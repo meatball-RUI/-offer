@@ -290,7 +290,12 @@ public static void main(String args[]){
    	System.out.println(s2);//compiler writes here s2.toString();
 }
 }
+Output:
 
+101 Raj lucknow
+102 Vijay ghaziabad
+
+In the above program, Java compiler internally calls toString() method, overriding this method will return the specified values of s1 and s2 objects of Student class.
    
 https://blog.csdn.net/weixin_43244698/article/details/106675167
 
