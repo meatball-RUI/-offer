@@ -46,15 +46,23 @@ public class Solution {
 		  }
 	//辅助函数helper：用来求出最小的时间差
 	private int helper(boolean minuteFlags[]){
-		int minDiff=minuteFlags.length-1;
+		//将最小时间差的初始值设为最大时间分钟数1440
+		int minDiff=minuteFlags.length;
+		//前一个时间点
 		int prev=-1;
-		int first=minuteFlags.length-1;
+		//第一个时间点
+		int first=minuteFlags.length;
+		//最后一个时间点
 		int last=-1;
+		//遍历minuteFlags数组
 		for(int i=0;i<minuteFlags.length;++i) {
+			//如果对应时间点有值的情况下
 			if(minuteFlags[i]) {
+			//如果有前时间点，计算最小时间差。如果没有前时间点，不用更新minDiff
 				if(prev>=0) {
 					minDiff=Math.min(i-prev, minDiff);
 				}
+				//
 				prev=i;
 				first=Math.min(i, first);
 				last=Math.max(i, last);
