@@ -238,3 +238,45 @@ firstTime = 1440  (minuteFlags.length)
 ### ？？？2
 什么情况下将变量赋值为-1？
 
+## 最终自己默写的
+```java
+package offer35;
+
+public class SolutionRUI {
+	public int getMinDiff(String[] times) {
+		if (times.length > 1440) {
+			return 0;
+		}
+		boolean[] minutes = new boolean[1440];
+		for (String time : times) {
+			String[] timeSplit = time.split(":");
+			int minute = (Integer.parseInt(timeSplit[0])) * 60 + Integer.parseInt(timeSplit[1]);
+			if (minutes[minute]) {
+				return 0;
+			}
+			minutes[minute] = true;
+		}
+		return helper(minutes);
+	}
+
+	private int helper(boolean[] minutes) {
+		// TODO Auto-generated method stub
+		int first = minutes.length;
+		int last = -1;
+		int minDiffer = minutes.length;
+		int prev = -1;
+		for (int i = 0; i < minutes.length; ++i) {
+			if (minutes[i]) {
+				if (prev >= 0) {
+					minDiffer = Math.min(minDiffer, i - prev);
+				}
+				prev = i;
+				first = Math.min(first, i);
+				last=Math.max(last, i);
+			}
+		}
+		return Math.min(minDiffer, first+minutes.length-last);
+	}
+}
+```
+
