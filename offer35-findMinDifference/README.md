@@ -148,6 +148,55 @@ Parses the string argument as a signed integer in the radix specified by the sec
 package offer35;
 
 import java.util.List;
-public class Solution{
-}
+
+public class ChatGPT {
+	//主函数：接收一个时间点列表，返回最小时间差
+	public int findMinDifference(List<String> timePoints) {
+		//如果时间点数量超过1440（一天内总分钟数），说明必然有重复时间点，直接返回0
+		if(timePoints.size()>1440) {
+			return 0;
+		}
+		//创建一个布尔数组，用来记录每一分钟是否存在时间点
+		boolean[] minuteFlags=new boolean[1440];
+		//遍历每一个时间点，将其转换为分钟数并存储在布尔数值中
+		for(String time:timePoints) {
+			//将时间点从“HH：MM”格式拆分为小时和分钟
+			String[] t=time.split(":");
+			//将小时和分钟转换为总分钟数
+			int minutes=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
+		    //如果该分钟数已经存在，说明有重复时间点，返回0
+			if(minuteFlags[minutes]){
+			      return 0;
+			    }
+			//在布尔数组中标记该分钟数对应的位置为true
+			    minuteFlags[minutes]=true;
+			    }
+			//调用辅助函数计算最小时间差
+			    return helper(minuteFlags);
+			  }
+		//辅助函数：计算布尔数组中相邻时间点的最小差值
+		private int helper(boolean minuteFlags[]){
+			//初始化最小时间差为最大可能值（1440分钟）
+			int minDiff=minuteFlags.length;
+			//变量prev用来记录前一个时间点的分钟数
+			int prev=-1;
+			//记录第一个时间点的位置
+			int first=minuteFlags.length;
+			//记录最后一个时间点的位置
+			int last=-1;
+			for(int i=0;i<minuteFlags.length;++i) {
+				if(minuteFlags[i]) {
+					if(prev>=0) {
+						minDiff=Math.min(i-prev, minDiff);
+					}
+					prev=i;
+					first=Math.min(i, first);
+					last=Math.max(i, last);
+				}
+			}
+			minDiff = Math.min(first+minuteFlags.length-last,minDiff);
+			return minDiff;
+		}
+	}		
+
 ```
