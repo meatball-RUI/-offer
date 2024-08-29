@@ -59,7 +59,7 @@ public class Solution {
 	}
 }
 ```
-### 不熟的点
+### 不熟的点1
 ```java
 String t[]=time.split(":");
 ```
@@ -125,7 +125,15 @@ acount=?
  uu =?   
  n=?  
  <br/>
- 所以我们的这个case中是将当前时间返回为小时跟分钟的数组
+ 所以我们的这个case中是将当前时间返回为小时跟分钟的数组  
+### 不熟的点2
 ```java
 int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
 ```
+static int 	parseInt(String s)
+Parses the string argument as a signed decimal integer.
+将字符串参数解析为有符号十进制整数。
+static int 	parseInt(String s, int radix)
+Parses the string argument as a signed integer in the radix specified by the second argument.
+将字符串参数解析为第二个参数指定的基数中的有符号整数
+所以在这边的这个case中是将小时和分钟转换成字符串整数
