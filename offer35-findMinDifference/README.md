@@ -59,10 +59,72 @@ public class Solution {
 	}
 }
 ```
-不熟的点
+###不熟的点
 ```java
 String t[]=time.split(":");
 ```
+split method in String:  
+String[] 	split(String regex)
+Splits this string around matches of the given regular expression.
+String[] 	split(String regex, int limit)
+Splits this string around matches of the given regular expression.
+split() 方法根据匹配给定的正则表达式来拆分字符串。
+*返回的是String类型的数组*
+注意： . 、 $、 | 和 * 等转义字符，必须得加 \\。
+注意：多个分隔符，可以用 | 作为连字符。
+eg:
+```java
+public class Test {
+    public static void main(String args[]) {
+        String str = new String("Welcome-to-Runoob");
+ 
+        System.out.println("- 分隔符返回值 :" );
+        for (String retval: str.split("-")){
+            System.out.println(retval);
+        }
+ 
+        System.out.println("");
+        System.out.println("- 分隔符设置分割份数返回值 :" );
+        for (String retval: str.split("-", 2)){
+            System.out.println(retval);
+        }
+ 
+        System.out.println("");
+        String str2 = new String("www.runoob.com");
+        System.out.println("转义字符返回值 :" );
+        for (String retval: str2.split("\\.", 3)){
+            System.out.println(retval);
+        }
+ 
+        System.out.println("");
+        String str3 = new String("acount=? and uu =? or n=?");
+        System.out.println("多个分隔符返回值 :" );
+        for (String retval: str3.split("and|or")){
+            System.out.println(retval);
+        }
+    }
+}
+```
+result:  
+- 分隔符返回值 :
+Welcome
+to
+Runoob
+
+- 分隔符设置分割份数返回值 :
+Welcome
+to-Runoob
+
+转义字符返回值 :
+www
+runoob
+com
+
+多个分隔符返回值 :
+acount=? 
+ uu =? 
+ n=?
+
 ```java
 int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
 ```
