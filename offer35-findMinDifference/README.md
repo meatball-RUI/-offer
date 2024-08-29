@@ -71,7 +71,7 @@ Splits this string around matches of the given regular expression.
 split() 方法根据匹配给定的正则表达式来拆分字符串。
 *返回的是String类型的数组*
 注意： . 、 $、 | 和 * 等转义字符，必须得加 \\。
-注意：多个分隔符，可以用 | 作为连字符。
+注意：多个分隔符，可以用 | 作为连字符。  
 eg:
 ```java
 public class Test {
@@ -124,7 +124,8 @@ com
 acount=?   
  uu =?   
  n=?  
-
+ <br/>
+ 所以我们的这个case中是将当前时间返回为小时跟分钟的数组
 ```java
 int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
 ```
