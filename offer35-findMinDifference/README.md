@@ -279,4 +279,20 @@ public class SolutionRUI {
 	}
 }
 ```
+```java
+package offer35;
+
+public class Main {
+
+	public static void main(String[] args) {
+		String[] times= {"00:30","12:00","12:59"};
+		SolutionRUI sr=new SolutionRUI();
+		System.out.print(sr.getMinDiff(times));
+	}
+
+}
+```
+### 执行结果
+59
+
 
