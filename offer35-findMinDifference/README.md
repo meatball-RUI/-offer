@@ -34,12 +34,14 @@ public class Solution {
 		    String t[]=time.split(":");
 		//将时间计算成分钟来表示
 		    int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
-		//如果minuteFlags[min]里之前已经有值了，就把
+		//如果minuteFlags[min]里之前已经有值了，就返回0，因为说明有一样的值，这时候最少差别肯定是0
 		    if(minuteFlags[min]){
 		      return 0;
 		    }
+		//将这个时间对应的value标成true
 		    minuteFlags[min]=true;
 		    }
+		//如果最小差值不是0的话，用helper方法来计算最小差值
 		    return helper(minuteFlags);
 		  }
 	private int helper(boolean minuteFlags[]){
