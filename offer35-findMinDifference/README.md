@@ -226,9 +226,9 @@ firstTime = 1440  (minuteFlags.length)
 1.当遍历到 minuteFlags[0] 时:    
 	firstTime = Math.min(0, 1440) = 0  
 2.当遍历到 minuteFlags[754] 时：  
-	firstTime = Math.min(754, 0) = 0
+	firstTime = Math.min(754, 0) = 0  
 3.当遍历到minuteFlags[1439] 时：  
-	firstTime=Math.min(1439,0)=0
+	firstTime=Math.min(1439,0)=0  
 最终，'firstTime'确定为‘0’，表示“00:00”是一天中最早的时间点。  
 #### 3.防止误更新
 通过将‘firstTime’初始化为‘1440’，我们确保即使所有的时间点都在一天的最后（靠近‘1439’），出不会出现‘firstTime’没有被正确更新的情况。‘1440’作为一个比所有可能的时间点位置都大的值，提供了一个安全的初始值，使得最小时间点总能被正确记录下来。
