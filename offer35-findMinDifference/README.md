@@ -70,7 +70,7 @@ public class Solution {
 				last=Math.max(i, last);
 			}
 		}
-		//结合跨午夜的情况来考虑最小时间差
+		//结合考虑跨午夜的情况来计算最小时间差
 		minDiff = Math.min(first+minuteFlags.length-last,minDiff);
 		//返回最小时间差
 		return minDiff;
