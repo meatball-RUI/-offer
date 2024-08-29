@@ -106,24 +106,24 @@ public class Test {
 }
 ```
 result:  
-- 分隔符返回值 :
-Welcome
-to
-Runoob
+- 分隔符返回值 :  
+Welcome  
+to  
+Runoob  
 
-- 分隔符设置分割份数返回值 :
-Welcome
-to-Runoob
+- 分隔符设置分割份数返回值 :  
+Welcome  
+to-Runoob  
 
-转义字符返回值 :
-www
-runoob
-com
+转义字符返回值 :  
+www  
+runoob  
+com  
 
-多个分隔符返回值 :
-acount=? 
- uu =? 
- n=?
+多个分隔符返回值 :  
+acount=?   
+ uu =?   
+ n=?  
 
 ```java
 int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
