@@ -59,3 +59,10 @@ public class Solution {
 	}
 }
 ```
+不熟的点
+```java
+String t[]=time.split(":");
+```
+```java
+int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
+```
