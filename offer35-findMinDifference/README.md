@@ -44,6 +44,7 @@ public class Solution {
 		//如果最小差值不是0的话，用helper方法来计算最小差值
 		    return helper(minuteFlags);
 		  }
+	//辅助函数helper：用来求出最小的时间差
 	private int helper(boolean minuteFlags[]){
 		int minDiff=minuteFlags.length-1;
 		int prev=-1;
