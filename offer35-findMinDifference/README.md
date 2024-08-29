@@ -82,7 +82,6 @@ eg:
 public class Test {
     public static void main(String args[]) {
         String str = new String("Welcome-to-Runoob");
- 
         System.out.println("- 分隔符返回值 :" );
         for (String retval: str.split("-")){
             System.out.println(retval);
@@ -142,3 +141,13 @@ static int 	parseInt(String s, int radix)
 Parses the string argument as a signed integer in the radix specified by the second argument.
 将字符串参数解析为第二个参数指定的基数中的有符号整数
 所以在这边的这个case中是将小时和分钟转换成字符串整数
+
+##参考一下ChatGPT
+在写注解的时候，不能够自己理解辅助函数
+```java
+package offer35;
+
+import java.util.List;
+public class Solution{
+}
+```
