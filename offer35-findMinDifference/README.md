@@ -62,9 +62,11 @@ public class Solution {
 				if(prev>=0) {
 					minDiff=Math.min(i-prev, minDiff);
 				}
-				//
+				//更新上一个时间点
 				prev=i;
+				//更新第一个时间点
 				first=Math.min(i, first);
+				//更新最后一个时间点
 				last=Math.max(i, last);
 			}
 		}
