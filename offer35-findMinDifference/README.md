@@ -28,10 +28,13 @@ public class Solution {
 		  }
 		  //创建一个模拟hash表的数组，键为时间，值为true或false；
 		  boolean minuteFlags[] = new boolean[1440];
-		  //timePoints
+		  //遍历timePoints中的每个时间
 		  for(String time: timePoints){
+		//将每个时间用split方法分成包含小时跟分钟的数组
 		    String t[]=time.split(":");
+		//将时间计算成分钟来表示
 		    int min=Integer.parseInt(t[0])*60+Integer.parseInt(t[1]);
+		//如果minuteFlags[min]里之前已经有值了，就把
 		    if(minuteFlags[min]){
 		      return 0;
 		    }
