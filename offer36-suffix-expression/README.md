@@ -97,7 +97,19 @@ public class ChatGPT {
 #### 复习一下switch  
 https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html  
 好处就是很多个if else可以使代码看上去更简洁
-#### 抛异常
+#### 不懂的点：异常处理  
+copy的：https://liaoxuefeng.com/books/java/exception/index.html
+程序运行的时候，经常会发生各种错误。
+比如
+##### Java的异常
+##### 捕获异常
+##### 抛出异常
+##### 自定义异常
+##### NullPointerException
+##### 使用断言
+##### 使用JDK Logging
+##### 使用Log4j
+##### 使用SLF4J和Logback
 
 
 
