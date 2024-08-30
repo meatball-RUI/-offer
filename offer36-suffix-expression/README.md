@@ -143,7 +143,7 @@ switch(code){
 ###### 方法二：在语言层面上提供一个异常处理机制  
 **Java 内置了一套异常处理机制，总是使用异常来表示错误。**   
 异常是一种class，因此它本身带有类型信息。异常可以在任何地方抛出，但只需要在上层捕获，这样就和方法调用分离了：
-![<img width="529" alt="Screenshot 2024-08-30 at 14 29 48" src="https://github.com/user-attachments/assets/821b23c3-b2b8-4573-95c1-707055ef197b">]
+<img width="529" alt="Screenshot 2024-08-30 at 14 29 48" src="https://github.com/user-attachments/assets/821b23c3-b2b8-4573-95c1-707055ef197b">
 
 ##### 捕获异常
 因为使用int类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。
