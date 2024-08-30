@@ -93,6 +93,13 @@ public class ChatGPT {
 	}
 }
 ```
+### 知识点。
+#### 复习一下switch  
+https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html  
+好处就是很多个if else可以使代码看上去更简洁
+#### 抛异常
+
+
 
 由于栈中只保存操作数，操作符不需要保存到栈中,因此上述代码创建的是一个整型栈。上述代码逐一扫描后缀表达式数组中的每个字符串。如果遇到的是一个操作数，则将其入栈；如果遇到的是一个操作符，则两个操作数出栈并执行相应的运算，然后将计算结果入栈。
 
