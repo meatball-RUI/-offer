@@ -162,9 +162,28 @@ Java内置的异常处理机制是指Java提供的一套用于处理程序运行
 ########## 异常处理的关键字
 * try：定义了一个代码块，用于包围可能会抛出异常的代码。
 * catch：紧跟在‘try’块之后，用于捕获特定类型的异常并处理它
-* finally：
-*
-*
+* finally：块中的代码始终执行，无论是否抛出或捕获异常。
+* throw：用于显式抛出一个异常。
+* throws：用于方法声明中，表示该方法可能抛出的异常类型。
+########### 基本的异常处理示例
+```java
+public class ExceptionExample {
+    public static void main(String[] args) {
+        try {
+            int result = divide(10, 0);
+            System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Cannot divide by zero!");
+        } finally {
+            System.out.println("Execution completed.");
+        }
+    }
+
+    public static int divide(int a, int b) throws ArithmeticException {
+        return a / b;
+    }
+}
+```
 ##### 捕获异常
 因为使用int类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。
 ##### 抛出异常
