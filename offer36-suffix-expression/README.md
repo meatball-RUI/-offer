@@ -1051,6 +1051,9 @@ Suppressed: java.lang.NumberFormatException: For input string: "abc"
 通过Throwable.getSuppressed()可以获取所有的Suppressed Exception。  
 绝大多数情况下，在finally中不要抛出异常。因此，我们通常不需要关心Suppressed Exception。
 
+提问时贴出异常  
+异常打印的详细的栈信息是找出问题的关键，许多初学者在提问时只贴代码，不贴异常，相当于只报案不给线索，福尔摩斯也无能为力。  
+
 ##### 自定义异常
 ##### NullPointerException
 ##### 使用断言
