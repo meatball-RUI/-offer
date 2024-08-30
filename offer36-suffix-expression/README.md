@@ -144,7 +144,27 @@ switch(code){
 **Java 内置了一套异常处理机制，总是使用异常来表示错误。**   
 异常是一种class，因此它本身带有类型信息。异常可以在任何地方抛出，但只需要在上层捕获，这样就和方法调用分离了：
 <img width="529" alt="Screenshot 2024-08-30 at 14 29 48" src="https://github.com/user-attachments/assets/821b23c3-b2b8-4573-95c1-707055ef197b">
-
+####### Java内置的异常处理机制
+Java内置的异常处理机制是指Java提供的一套用于处理程序运行时出现错误或异常情况的框架。通过使用异常处理机制，开发者可以编写更健壮的代码，从而避免程序在运行时因不可预见的错误而崩溃。
+######## 异常分为三类：
+######### 受检异常（Checked Exception）：
+* 继承自“java.lang.Exception”类，但不包括继承自“RuntimeException”的异常
+* 必须在代码中明确处理（使用try-catch块）或通过方法声明抛出（使用‘throws’关键字）
+* 常见的受检异常包括‘IOException’，‘SQLException’等。
+######### 非受检异常（Unchecked Excetpion）
+* 继承自‘java.lang.RuntimeException’类
+* 不需要在代码中显示处理，编译器不会强制要求捕获或声明。
+* 常见的非受检异常包括‘NullPointerException’，“ArrayIndexOutofBoundsException”等。
+######### 错误（Error）
+* 继承自‘java.lang.Error’类
+* 通常表示JVM自身遇到的问题，如内存不足（OutOfMemoryError）或栈溢出（StackOverflowError）
+* 通常不建议在代码中捕获或处理‘Error’，因为它们表示严重的问题。
+########## 异常处理的关键字
+* try：定义了一个代码块，用于包围可能会抛出异常的代码。
+* catch：紧跟在‘try’块之后，用于捕获特定类型的异常并处理它
+* finally：
+*
+*
 ##### 捕获异常
 因为使用int类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。
 ##### 抛出异常
