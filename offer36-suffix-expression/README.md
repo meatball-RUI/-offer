@@ -1054,6 +1054,11 @@ Suppressed: java.lang.NumberFormatException: For input string: "abc"
 提问时贴出异常  
 异常打印的详细的栈信息是找出问题的关键，许多初学者在提问时只贴代码，不贴异常，相当于只报案不给线索，福尔摩斯也无能为力。  
 
+小结  
+调用printStackTrace()可以打印异常的传播栈，对于调试非常有用；  
+捕获异常并再次抛出新的异常时，应该持有原始异常信息；  
+通常不要在finally中抛出异常。如果在finally中抛出异常，应该原始异常加入到原有异常中。调用方可通过Throwable.getSuppressed()获取所有添加的Suppressed Exception。  
+
 ##### 自定义异常
 ##### NullPointerException
 ##### 使用断言
