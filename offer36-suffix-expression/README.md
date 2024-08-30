@@ -380,10 +380,135 @@ public class ThrowsExample {
 
 ######### throws再多一些例子用来理解
 为了更好地理解 throws 关键字的用法，下面提供一些具体的示例，这些示例涵盖了不同的场景，展示了 throws 如何用于声明方法可能抛出的异常类型。  
-示例 1: 声明单个受检异常  
+示例 1: 声明单个受检异常   
+假设我们有一个读取文件的函数，它可能会抛出 IOException。 
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
-假设我们有一个读取文件的函数，它可能会抛出 IOException。  
+public class SingleThrowsExample {
+    public static void main(String[] args) {
+        try {
+            readFile("example.txt");
+        } catch (IOException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
 
+    public static void readFile(String fileName) throws IOException {  // 声明抛出 IOException
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        String line = reader.readLine();
+        System.out.println(line);
+        reader.close();
+    }
+}
+```
+解释:  
+    readFile 方法声明了 throws IOException，这表示调用 readFile 的代码必须处理可能抛出的 IOException。
+    在 main 方法中，我们使用 try-catch 块来捕获和处理这个异常。  
+
+示例 1: 声明单个受检异常   
+假设我们有一个方法需要同时处理文件和数据库操作，它可能抛出 IOException 和 SQLException 两种异常。   
+```java
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class MultipleThrowsExample {
+    public static void main(String[] args) {
+        try {
+            processFileAndDatabase("example.txt");
+        } catch (IOException | SQLException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
+
+    public static void processFileAndDatabase(String fileName) throws IOException, SQLException {  // 声明抛出 IOException 和 SQLException
+        // 读取文件
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        String line = reader.readLine();
+        System.out.println("File Content: " + line);
+        reader.close();
+
+        // 连接数据库
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/test", "user", "password");
+        System.out.println("Connected to database");
+        conn.close();
+    }
+}
+```
+解释: 
+    * processFileAndDatabase 方法声明了 throws IOException, SQLException，这表示该方法可能抛出这两种异常，调用者必须处理它们。  
+    * 在 main 方法中，我们使用了多重 catch 语句来捕获并处理这些异常。  
+
+示例 3: 抛出自定义异常  
+
+假设我们有一个方法用于验证用户输入，如果输入不符合要求，我们会抛出自定义的异常。  
+```java
+class InvalidInputException extends Exception {
+    public InvalidInputException(String message) {
+        super(message);
+    }
+}
+
+public class CustomThrowsExample {
+    public static void main(String[] args) {
+        try {
+            validateInput("invalid_input");
+        } catch (InvalidInputException e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
+
+    public static void validateInput(String input) throws InvalidInputException {  // 声明抛出自定义异常
+        if (!input.equals("valid_input")) {
+            throw new InvalidInputException("Input is not valid!");  // 显式抛出异常
+        }
+        System.out.println("Input is valid.");
+    }
+}
+```
+解释:  
+    validateInput 方法声明了 throws InvalidInputException，表示该方法可能抛出自定义的 InvalidInputException。  
+    在 main 方法中，我们捕获并处理了这个自定义异常。  
+
+示例 4: 异常传播  
+在多个方法调用链中，一个方法可能会因为未捕获的异常将该异常传播给调用它的方法，这种情况同样适用于 throws。  
+```java
+public class PropagationThrowsExample {
+    public static void main(String[] args) {
+        try {
+            level1();
+        } catch (Exception e) {
+            System.out.println("Caught Exception: " + e.getMessage());
+        }
+    }
+
+    public static void level1() throws Exception {
+        level2();
+    }
+
+    public static void level2() throws Exception {
+        level3();
+    }
+
+    public static void level3() throws Exception {
+        throw new Exception("Exception thrown in level3");
+    }
+}
+```
+解释:  
+    * level3 方法显式抛出了一个异常，并声明了 throws Exception。  
+    * 由于 level2 和 level1 方法也调用了 level3，它们也必须声明 throws Exception，让异常在调用链中向上传播。  
+    * 最终，异常在 main 方法中被捕获。  
+总结:
+    *throws 关键字用于声明一个方法可能抛出的异常类型，这些异常需要在调用方法时被处理或进一步声明。
+    *它允许我们在调用链中明确地传递异常信息，确保每个调用者都意识到可能出现的异常情况并作出相应的处理。
+    
 ##### 捕获异常
 因为使用int类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。
 ##### 抛出异常
