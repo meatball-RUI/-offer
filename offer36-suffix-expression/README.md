@@ -24,3 +24,79 @@
 如果输入数组的长度是n，那么对其中的每个字符串都有一次push操作；  
 如果是操作符，那么还需要进行数学计算和两次push操作。  
 由于每个push操作、pop操作和数学计算都是O（1），因此总体时间复杂度是O（n）。由于栈中可能有O（n）个操作数，因此这种解法的空间复杂度也是O（n）。
+
+##ChatGPT提供的代码
+```java
+package offer36;
+
+import java.util.Stack;
+
+public class ChatGPT {
+	// Method to evaluate a Reverse Polish Notation expression
+	//评估逆波兰表达式的方法
+	public int evalRPN(String[] tokens) {
+		// Stack to store integers for the calculation
+		//用于存储计算所需的整数的栈
+		Stack<Integer> stack = new Stack<>();
+		// Loop through each token in the input array
+		//遍历tokens中的每个元素
+		for (String token : tokens) {
+			// Check if the token is an operator
+			// 检查是否是一个操作符
+			switch (token) {
+				case "+":
+				case "-":
+				case "*":
+				case "/":
+					// Pop the top two elements from the stack for the operation
+					// 从栈中弹出两个元素用于计算
+					int num1 = stack.pop();
+					int num2 = stack.pop();
+					
+					// Perform the calculation and push the result back to the stack
+					// 将计算结果压入栈中
+					stack.push(calculate(num2, num1, token));
+					break;
+				
+				default:
+					// If the token is a number, push it onto the stack
+					// 如果遍历的token元素是一个数字，压入栈中
+					stack.push(Integer.parseInt(token));
+			}
+		}
+		// The final result will be the last element remaining on the stack
+		//弹出栈中最后的元素
+		return stack.pop();
+	}
+	
+	// Helper method to perform the actual arithmetic operation
+	// 辅助方法用来执行算术运算
+	private Integer calculate(int num2, int num1, String operator) {
+		// Perform the operation based on the operator provided
+		// 基于提供的操作符执行计算
+		switch(operator) {
+			case "+":
+				// Add the two numbers
+				// 将两数想加
+				return num2 + num1;
+			case "-":
+				// Subtract the second number from the first
+				// 从第一个元素中减去第二个元素
+				return num2 - num1;
+			case "*":
+				// Multiply the two numbers
+				// 将两数相乘
+				return num2 * num1;
+			case "/":
+				// Divide the first number by the second
+				// 将两数相除
+				return num2 / num1;
+			default:
+				// If an invalid operator is encountered, throw an exception
+				// 如果遇到一个无效的操作符，抛异常
+				throw new IllegalArgumentException("Invalid operator: " + operator);
+		}
+	}
+}
+```
+
