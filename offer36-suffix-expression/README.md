@@ -98,10 +98,46 @@ public class ChatGPT {
 https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html  
 好处就是很多个if else可以使代码看上去更简洁
 #### 不懂的点：异常处理  
-copy的：https://liaoxuefeng.com/books/java/exception/index.html
-程序运行的时候，经常会发生各种错误。
-比如
+摘自：https://liaoxuefeng.com/books/java/exception/index.html  
+程序运行的时候，经常会发生各种错误。  
+比如，使用Excel的时候，它有时候会报错
 ##### Java的异常
+在计算机程序运行的过程中，总是会出现各种各样的错误。  
+有一些错误是用户造成的，比如，希望用户输入一个int类型的年龄，但是用记的输入是abc：  
+```java
+//假设用户输入了abc：
+String s="abc";
+int n=Integer.parseInt(s); //NumberFormatException!
+```
+程序想要读写某个文件的内容，但是用户已经把它删除了：
+```
+//用户删除了该文件
+String t=readFile("C:\\abc.txt");//FileNotFound Exception!
+```
+还有一些错误是随机出现，并且永远不可能避免的。比如：
+* 网络突然断了，连接不到远程服务器
+* 内存耗尽，程序崩溃了；
+* 用户点“打印”，但根本没有打印机；
+* 。。。。
+所以，一个健壮的程序必须处理各种各样的错误。  
+所谓错误，就是程序调用某个函数的时候，如果失败了，就表示出错。  
+调用方如何获知调用失败的信息？有两种方法：  
+方法一：约定返回错误码。
+例如，处理一个文件，如果返回0，表示成功，返回其他整数，表示约定的错误码：
+int code = processFile("C:\\test.txt");
+if(code==0){
+//ok;
+}else{
+//error
+switch(code){
+	case 1:
+	//file not found;
+	case 2:
+	//no read permission
+	default:
+	//unknown error;
+	}
+}
 ##### 捕获异常
 ##### 抛出异常
 ##### 自定义异常
