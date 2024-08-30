@@ -124,6 +124,7 @@ String t=readFile("C:\\abc.txt");//FileNotFound Exception!
 调用方如何获知调用失败的信息？有两种方法：  
 方法一：约定返回错误码。
 例如，处理一个文件，如果返回0，表示成功，返回其他整数，表示约定的错误码：
+```java
 int code = processFile("C:\\test.txt");
 if(code==0){
 //ok;
@@ -138,6 +139,7 @@ switch(code){
 	//unknown error;
 	}
 }
+```
 ##### 捕获异常
 ##### 抛出异常
 ##### 自定义异常
