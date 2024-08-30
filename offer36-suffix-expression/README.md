@@ -673,8 +673,384 @@ RuntimeException无需强制捕获，非RuntimeException（Checked Exception）�
 不推荐捕获了异常但不进行任何处理。  
 
 ##### 捕获异常
-因为使用int类型的错误码，想要处理就非常麻烦。这种方式常见于底层C函数。
+在Java中，凡是可能抛出异常的语句，都可以用try ... catch捕获。把可能发生异常的语句放在try { ... }中，然后使用catch捕获对应的Exception及其子类  
+多catch语句  
+可以使用多个catch语句，每个catch分别捕获对应的Exception及其子类。JVM在捕获到异常后，会从上到下匹配catch语句，匹配到某个catch后，执行catch代码块，然后不再继续匹配。  
+简单地说就是：多个catch语句只有一个能被执行。例如： 
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println(e);
+    } catch (NumberFormatException e) {
+        System.out.println(e);
+    }
+}
+```
+存在多个catch的时候，catch的顺序非常重要：子类必须写在前面。例如：
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println("IO error");
+    } catch (UnsupportedEncodingException e) { // 永远捕获不到
+        System.out.println("Bad encoding");
+    }
+}
+```
+对于上面的代码，UnsupportedEncodingException异常是永远捕获不到的，因为它是IOException的子类。当抛出UnsupportedEncodingException异常时，会被catch (IOException e) { ... }捕获并执行。  
+因此，正确的写法是把子类放到前面：  
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (UnsupportedEncodingException e) {
+        System.out.println("Bad encoding");
+    } catch (IOException e) {
+        System.out.println("IO error");
+    }
+}
+```
+finally语句  
+无论是否有异常发生，如果我们都希望执行一些语句，例如清理工作，怎么写？  
+可以把执行语句写若干遍：正常执行的放到try中，每个catch再写一遍。例如：  
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+        System.out.println("END");
+    } catch (UnsupportedEncodingException e) {
+        System.out.println("Bad encoding");
+        System.out.println("END");
+    } catch (IOException e) {
+        System.out.println("IO error");
+        System.out.println("END");
+    }
+}
+```
+上述代码无论是否发生异常，都会执行System.out.println("END");这条语句。  
+那么如何消除这些重复的代码？Java的try ... catch机制还提供了finally语句，finally语句块保证有无错误都会执行。上述代码可以改写如下：  
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (UnsupportedEncodingException e) {
+        System.out.println("Bad encoding");
+    } catch (IOException e) {
+        System.out.println("IO error");
+    } finally {
+        System.out.println("END");
+    }
+}
+```
+注意finally有几个特点：  
+    1.finally语句不是必须的，可写可不写；  
+    2.finally总是最后执行。  
+如果没有发生异常，就正常执行try { ... }语句块，然后执行finally。如果发生了异常，就中断执行try { ... }语句块，然后跳转执行匹配的catch语句块，最后执行finally。  
+可见，finally是用来保证一些代码必须执行的。  
+某些情况下，可以没有catch，只使用try ... finally结构。例如：  
+```java
+void process(String file) throws IOException {
+    try {
+        ...
+    } finally {
+        System.out.println("END");
+    }
+}
+```
+因为方法声明了可能抛出的异常，所以可以不写catch。  
+捕获多种异常
+如果某些异常的处理逻辑相同，但是异常本身不存在继承关系，那么就得编写多条catch子句:  
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException e) {
+        System.out.println("Bad input");
+    } catch (NumberFormatException e) {
+        System.out.println("Bad input");
+    } catch (Exception e) {
+        System.out.println("Unknown error");
+    }
+}
+```
+因为处理IOException和NumberFormatException的代码是相同的，所以我们可以把它两用|合并到一起： 
+```java
+public static void main(String[] args) {
+    try {
+        process1();
+        process2();
+        process3();
+    } catch (IOException | NumberFormatException e) {
+        // IOException或NumberFormatException
+        System.out.println("Bad input");
+    } catch (Exception e) {
+        System.out.println("Unknown error");
+    }
+}
+```
 ##### 抛出异常
+异常的传播  
+当某个方法抛出了异常时，如果当前方法没有捕获异常，异常就会被抛到上层调用方法，直到遇到某个try ... catch被捕获为止： 
+```java
+// exception
+public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void process1() {
+        process2();
+    }
+
+    static void process2() {
+        Integer.parseInt(null); // 会抛出NumberFormatException
+    }
+}
+```
+通过printStackTrace()可以打印出方法的调用栈，类似：  
+```java
+java.lang.NumberFormatException: null
+    at java.base/java.lang.Integer.parseInt(Integer.java:614)
+    at java.base/java.lang.Integer.parseInt(Integer.java:770)
+    at Main.process2(Main.java:16)
+    at Main.process1(Main.java:12)
+    at Main.main(Main.java:5)
+```
+printStackTrace()对于调试错误非常有用，上述信息表示：NumberFormatException是在java.lang.Integer.parseInt方法中被抛出的，从下往上看，调用层次依次是：   
+1.main()调用process1()；  
+2.process1()调用process2()；  
+3.process2()调用Integer.parseInt(String)；  
+4.Integer.parseInt(String)调用Integer.parseInt(String, int)  
+查看Integer.java源码可知，抛出异常的方法代码如下： 
+```java
+public static int parseInt(String s, int radix) throws NumberFormatException {
+    if (s == null) {
+        throw new NumberFormatException("null");
+    }
+    ...
+}
+```
+并且，每层调用均给出了源代码的行号，可直接定位。  
+抛出异常  
+当发生错误时，例如，用户输入了非法的字符，我们就可以抛出异常。    
+如何抛出异常？参考Integer.parseInt()方法，抛出异常分两步：  
+1.创建某个Exception的实例；  
+2.用throw语句抛出。  
+下面是一个例子：  
+```java
+void process2(String s) {
+    if (s==null) {
+        NullPointerException e = new NullPointerException();
+        throw e;
+    }
+}
+```
+实际上，绝大部分抛出异常的代码都会合并写成一行：  
+```
+void process2(String s) {
+    if (s==null) {
+        throw new NullPointerException();
+    }
+}
+```
+如果一个方法捕获了某个异常后，又在catch子句中抛出新的异常，就相当于把抛出的异常类型“转换”了  
+```
+void process1(String s) {
+    try {
+        process2();
+    } catch (NullPointerException e) {
+        throw new IllegalArgumentException();
+    }
+}
+
+void process2(String s) {
+    if (s==null) {
+        throw new NullPointerException();
+    }
+}
+```
+当process2()抛出NullPointerException后，被process1()捕获，然后抛出IllegalArgumentException()。  
+如果在main()中捕获IllegalArgumentException，我们看看打印的异常栈：  
+```java
+// exception
+public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void process1() {
+        try {
+            process2();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    static void process2() {
+        throw new NullPointerException();
+    }
+}
+```
+打印出的异常栈类似：  
+```java
+java.lang.IllegalArgumentException
+    at Main.process1(Main.java:15)
+    at Main.main(Main.java:5)
+```
+这说明新的异常丢失了原始异常信息，我们已经看不到原始异常NullPointerException的信息了。  
+为了能追踪到完整的异常栈，在构造异常的时候，把原始的Exception实例传进去，新的Exception就可以持有原始Exception信息。对上述代码改进如下：  
+```java
+// exception
+public class Main {
+    public static void main(String[] args) {
+        try {
+            process1();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void process1() {
+        try {
+            process2();
+        } catch (NullPointerException e) {
+            throw new IllegalArgumentException(e);
+        }
+    }
+
+    static void process2() {
+        throw new NullPointerException();
+    }
+}
+```
+运行上述代码，打印出的异常栈类似：
+```
+java.lang.IllegalArgumentException: java.lang.NullPointerException
+    at Main.process1(Main.java:15)
+    at Main.main(Main.java:5)
+Caused by: java.lang.NullPointerException
+    at Main.process2(Main.java:20)
+    at Main.process1(Main.java:13)
+```
+注意到Caused by: Xxx，说明捕获的IllegalArgumentException并不是造成问题的根源，根源在于NullPointerException，是在Main.process2()方法抛出的。  
+在代码中获取原始异常可以使用Throwable.getCause()方法。如果返回null，说明已经是“根异常”了。  
+有了完整的异常栈的信息，我们才能快速定位并修复代码的问题。  
+最佳实践  
+捕获到异常并再次抛出时，一定要留住原始异常，否则很难定位第一案发现场！  
+如果我们在try或者catch语句块中抛出异常，finally语句是否会执行？例如：  
+```java
+// exception
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Integer.parseInt("abc");
+        } catch (Exception e) {
+            System.out.println("catched");
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("finally");
+        }
+    }
+}
+```
+上述代码执行结果如下：  
+```java
+catched
+finally
+Exception in thread "main" java.lang.RuntimeException: java.lang.NumberFormatException: For input string: "abc"
+    at Main.main(Main.java:8)
+Caused by: java.lang.NumberFormatException: For input string: "abc"
+    at ...
+```
+第一行打印了catched，说明进入了catch语句块。第二行打印了finally，说明执行了finally语句块。  
+因此，在catch中抛出异常，不会影响finally的执行。JVM会先执行finally，然后抛出异常。  
+
+异常屏蔽
+如果在执行finally语句时抛出异常，那么，catch语句的异常还能否继续抛出？例如：
+```java
+// exception
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Integer.parseInt("abc");
+        } catch (Exception e) {
+            System.out.println("catched");
+            throw new RuntimeException(e);
+        } finally {
+            System.out.println("finally");
+            throw new IllegalArgumentException();
+        }
+    }
+}
+```
+执行上述代码，发现异常信息如下：  
+```java
+catched
+finally
+Exception in thread "main" java.lang.IllegalArgumentException
+    at Main.main(Main.java:11)
+```
+这说明finally抛出异常后，原来在catch中准备抛出的异常就“消失”了，因为只能抛出一个异常。没有被抛出的异常称为“被屏蔽”的异常（Suppressed Exception）。  
+在极少数的情况下，我们需要获知所有的异常。如何保存所有的异常信息？方法是先用origin变量保存原始异常，然后调用Throwable.addSuppressed()，把原始异常添加进来，最后在finally抛出：   
+这说明finally抛出异常后，原来在catch中准备抛出的异常就“消失”了，因为只能抛出一个异常。没有被抛出的异常称为“被屏蔽”的异常（Suppressed Exception）。
+
+在极少数的情况下，我们需要获知所有的异常。如何保存所有的异常信息？方法是先用origin变量保存原始异常，然后调用Throwable.addSuppressed()，把原始异常添加进来，最后在finally抛出：  
+```java
+// exception
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Exception origin = null;
+        try {
+            System.out.println(Integer.parseInt("abc"));
+        } catch (Exception e) {
+            origin = e;
+            throw e;
+        } finally {
+            Exception e = new IllegalArgumentException();
+            if (origin != null) {
+                e.addSuppressed(origin);
+            }
+            throw e;
+        }
+    }
+}
+```
+当catch和finally都抛出了异常时，虽然catch的异常被屏蔽了，但是，finally抛出的异常仍然包含了它： 
+```java
+Exception in thread "main" java.lang.IllegalArgumentException
+    at Main.main(Main.java:11)
+Suppressed: java.lang.NumberFormatException: For input string: "abc"
+    at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+    at java.base/java.lang.Integer.parseInt(Integer.java:652)
+    at java.base/java.lang.Integer.parseInt(Integer.java:770)
+    at Main.main(Main.java:6)
+```
+通过Throwable.getSuppressed()可以获取所有的Suppressed Exception。  
+绝大多数情况下，在finally中不要抛出异常。因此，我们通常不需要关心Suppressed Exception。
+
 ##### 自定义异常
 ##### NullPointerException
 ##### 使用断言
