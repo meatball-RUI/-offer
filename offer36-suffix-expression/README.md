@@ -106,6 +106,13 @@ throw：程序员手动抛出一个异常，这个异常后面的代码不会被
 **throw找到对应的try catch代码块后不会再回头执行执行throw后面的代码。** </br>
 finally：不管程序有没有捕捉到try catch里面的异常，都一定会执行finally里面的程序。
 ##### 受检异常 非受检异常
+受检异常就是必须用try catch处理，或在方法申明中抛出。  
+而非受检异常就不用。  
+我所理解的必须要处理的受检异常，在java定义的类中申明了的异常都是受检异常
+``` java
+public FileReader(File file)
+           throws FileNotFoundException
+```
 ## 时间空间复杂度
 如果输入数组的长度是n，那么对其中的每个字符串都有一次push操作；  
 如果是操作符，那么还需要进行数学计算和两次push操作。  
