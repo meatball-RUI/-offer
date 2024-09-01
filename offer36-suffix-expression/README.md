@@ -101,7 +101,7 @@ https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html
 参考：https://liaoxuefeng.com/books/java/exception/index.html  
 ##### 理清try catch，throw, throws
 try catch：捕获异常，并处理这个异常，不会让捕获到的异常导致程序中断</br>
-throw：程序员手动抛出一个异常，这个异常后面的代码不会被执行，程序会找关于这个异常最近的try catch代码块，处理这个异常。
+throw：程序员手动抛出一个异常，这个异常后面的代码不会被执行，程序会找关于这个异常最近的try catch代码块，处理这个异常。  
 注意：
 **throw找到对应的try catch代码块后不会再回头执行执行throw后面的代码。** </br>
 finally：不管程序有没有捕捉到try catch里面的异常，都一定会执行finally里面的程序。    
