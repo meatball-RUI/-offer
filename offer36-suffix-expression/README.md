@@ -118,3 +118,66 @@ public FileReader(File file)
 如果是操作符，那么还需要进行数学计算和两次push操作。  
 由于每个push操作、pop操作和数学计算都是O（1），因此总体时间复杂度是O（n）。由于栈中可能有O（n）个操作数，因此这种解法的空间复杂度也是O（n）。
 
+##我自己默写的  
+```java
+package offer36;
+
+import java.util.Stack;
+
+public class ChatGPTRUI {
+	public int envalNBN(String[] tokens) {
+		Stack<Integer> stack = new Stack<>();
+		for(String token:tokens) {
+			switch(token) {
+				case "+":
+				case "-":
+				case "*":
+				case "/":
+					int num1=stack.pop();
+					int num2=stack.pop();
+					stack.push(calculate(num1,num2,token));
+					break;
+				default:
+					stack.push(Integer.parseInt(token));
+			}
+		}
+		return stack.pop();
+	}
+
+	private int calculate(int num1, int num2, String operator) {
+		switch(operator) {
+			case "+":
+				return num1 + num2;
+			case "-":
+				return num1 - num2;
+			case "*":
+				return num1 * num2;
+			case "/":
+				return num1 / num2;
+			default:
+				throw new IllegalArgumentException("大哥，您操作符输错了");
+		}
+	}
+}
+```
+```java
+package offer36;
+
+import java.util.Stack;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String [] tokens= {"2","1","3","/","+"};
+		ChatGPTRUI cgr=new ChatGPTRUI();
+		System.out.println(cgr.envalNBN(tokens));
+	}
+
+}
+```
+执行结果  
+```java
+5
+```
+结果不对，正确结果应该是2（2+1/3）
