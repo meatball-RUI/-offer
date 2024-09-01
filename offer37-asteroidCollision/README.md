@@ -70,7 +70,7 @@ public class OfferAddComments {
 * 这个方法是流的终端操作，表示将流中的元素收集到一个数组中。
 * 在这里，toArray() 将 IntStream 转换为一个 int[] 数组
 ### 不理解Lambda
-在Java中，Lambda表达式是一种简洁的函数式编程方式，用于表示一个匿名函数。它于Java 8引入，目的是简化代码、增强可读性，并使函数式编程更容易实现。  
+在Java中，Lambda表达式是一种简洁的函数式编程方式，用于表示一个匿名函数。它于Java 8引入，目的是简化代码、增强可读性，并使函数式编程更容易实现。
 #### Lambda表达式的语法
 Lambda表达式的基本语法是:  
 ```java
@@ -114,7 +114,9 @@ System.out.println(add.apply(5, 3)); // 输出: 8
 Runnable greet = () -> System.out.println("Hello, world!");
 greet.run(); // 输出: Hello, world!
 ```
-
+....
+总结  
+Lambda表达式使Java编程更简洁、表达力更强，尤其是在处理函数式编程任务时。它提供了一种更简洁的方式来创建匿名方法，适用于回调、事件处理、集合操作、流处理等场景。通过Lambda表达式，你可以更方便地使用Java的函数式编程特性，从而提高代码的可读性和可维护性。  
 
 
 
