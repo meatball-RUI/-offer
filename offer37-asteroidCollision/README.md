@@ -57,3 +57,66 @@ public class OfferAddComments {
 	}
 }
 ```
+## 知识瓶井区
+### 不理解return stack.stream().mapToInt(i -> i).toArray();这行代码。  
+逐步解析：  
+1.`stack.stream`:
+将栈中的元素转化为一个流('Stream<Integer>')。流是一种高级迭代器，可以用来执行各种操作，比如过滤、映射、归约等。
+2.`mapToInt(i->i)`:  
+* 这个方法是一个中间操作，它将流中的元素映射（转换）为另一种形式。  
+* mapToInt(i -> i) 表示将流中的每一个 Integer 元素 i 映射为对应的 int 基本类型。  
+* i -> i 是一个 Lambda 表达式，表示对于流中的每个元素 i，返回它本身。这个表达式的作用是直接将 Integer 转换为 int。  
+3.toArray():
+* 这个方法是流的终端操作，表示将流中的元素收集到一个数组中。
+* 在这里，toArray() 将 IntStream 转换为一个 int[] 数组
+### 不理解Lambda
+在Java中，Lambda表达式是一种简洁的函数式编程方式，用于表示一个匿名函数。它于Java 8引入，目的是简化代码、增强可读性，并使函数式编程更容易实现。  
+#### Lambda表达式的语法
+Lambda表达式的基本语法是:  
+```java
+(parameters) -> expression
+```
+或者，如果有多个语句:  
+```
+(parameters) -> {
+    // statements
+}
+```
+主要组成部分   
+1.参数列表：  
+* 括号内的参数列表，可以是零个、一个或多个参数。如果只有一个参数，可以省略括号。  
+* 例如：x -> x * x（一个参数），(x, y) -> x + y（多个参数），() -> System.out.println("Hello")（没有参数）
+2.箭头符号 ->：  
+* 用于分隔参数列表和表达式体。
+3.表达式体：
+* 可以是单一的表达式或包含多个语句的代码块
+* 单一表达式：自动返回值。
+* 代码块：需要使用`return`语句来返回值
+示例：  
+1.简单的Lambda表达式  
+```java
+// Lambda 表达式：一个参数，返回它的平方
+Function<Integer, Integer> square = x -> x * x;
+System.out.println(square.apply(5)); // 输出: 25
+```
+2.多个参数和代码块  
+```java
+// Lambda 表达式：两个参数，返回它们的和
+BinaryOperator<Integer> add = (x, y) -> {
+    int result = x + y;
+    return result;
+};
+System.out.println(add.apply(5, 3)); // 输出: 8
+```
+3.没有参数的Lambda表达式
+```java
+// Lambda 表达式：无参数，打印一条消息
+Runnable greet = () -> System.out.println("Hello, world!");
+greet.run(); // 输出: Hello, world!
+```
+
+
+
+
+
+
