@@ -22,3 +22,38 @@ eg
 | 5  | 8 | 入栈 | [-6，4，8] | 方向相同，入栈
 | 6 | -5 | 相撞 | [-6，4，8] | 方向相对，8跟-5相撞，-5消失
 
+## ChatGPT code加自己理解的comments
+```java
+package offer37;
+
+import java.util.Stack;
+
+public class OfferAddComments {
+	public int[] asteroidCollision(int[] asteroids) {
+		//创建一个栈用来存储还未销毁的小行星
+		Stack<Integer> stack=new Stack<>();
+		//遍历所有小行星
+		for(int as:asteroids) {
+			//当栈不为空时，并且栈顶小行星向右，当前小行向左，如果栈顶小行星小于当前小行星，栈顶小行星销毁
+			//用while循环看是否要继续销毁栈顶小行星
+			while(!stack.isEmpty()&&stack.peek()>0&&stack.peek()<-as) {
+				stack.pop();
+			}
+			//当栈不为空时，并且栈顶小行星向右，当前小行星向左，两小行星的绝对值相等，
+			//当前小行星跟栈顶小行星都销毁，此时不会再循环了，因为当前小行星已经被销毁
+			//不能再跟栈内的小行星继续比较了
+			if(!stack.isEmpty()&&as<0&&stack.peek()==-as) {
+				stack.pop();
+			}
+			//否则如果当前栈为空或栈顶小行星向左或当前小行星向右
+			//此时栈顶小行星向左时，就确保了不管当前小行星向左还是向右都不会相撞，可以压入栈中
+			//同理当前小行星向右时，就确保了不管当前小行星向左还是向右都不会相撞，可以压入栈中
+			else if(as>0 || stack.empty()||stack.peek()<0) {
+				stack.push(as);//当前小行星入栈
+			}
+		}
+		//将栈中的元素转换成int数组来返回
+		return stack.stream().mapToInt(i -> i).toArray();
+	}
+}
+```
