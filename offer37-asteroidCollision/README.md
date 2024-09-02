@@ -189,7 +189,8 @@ public int[] asteroidCollision(int[] asteroids) {
     return stack.stream().mapToInt(i -> i).toArray();
 }
 ```
-
+总结：
+将‘Stack’转换为数组并返回是一种符合Java惯用法的做法，确保返回的数据类型符合方法签名，保持数据封装的完整性，并且避免外部代码对内部数据结构的直接修改。
 
 
 
