@@ -118,8 +118,6 @@ greet.run(); // 输出: Hello, world!
 lambda总结  
 Lambda表达式使Java编程更简洁、表达力更强，尤其是在处理函数式编程任务时。它提供了一种更简洁的方式来创建匿名方法，适用于回调、事件处理、集合操作、流处理等场景。通过Lambda表达式，你可以更方便地使用Java的函数式编程特性，从而提高代码的可读性和可维护性。  
 ### 自动装箱 自动拆箱
-
-### 为什么不直接返回Stack呢
 自动装箱（Autoboxing） 和 自动拆箱（Unboxing） 是Java语言中的两个重要特性，旨在简化基本数据类型（如int、char、double等）与其对应的封装类（如Integer、Character、Double等）之间的转换。  
 自动装箱（Autoboxing）  
 自动装箱 是指Java编译器自动将基本数据类型转换为其对应的封装类对象的过程。例如，将int类型转换为Integer对象。  
@@ -171,6 +169,8 @@ int b = a;  // 抛出 NullPointerException
 ```
 总结  
 自动装箱和拆箱大大简化了基本数据类型与对象类型之前的转换，提升了代码的简洁和可读性。然后，在使用时应注意可能的性能问题和‘NullPointerException’的风险
+### 为什么不直接返回Stack呢
+
 
 
 
