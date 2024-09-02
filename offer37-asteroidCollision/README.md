@@ -170,6 +170,25 @@ int b = a;  // 抛出 NullPointerException
 总结  
 自动装箱和拆箱大大简化了基本数据类型与对象类型之前的转换，提升了代码的简洁和可读性。然后，在使用时应注意可能的性能问题和‘NullPointerException’的风险
 ### 为什么不直接返回Stack呢
+在Java中，不能直接返回 Stack 而是要将其转换成数组，通常是出于以下几个原因：  
+1. 返回类型的一致性   
+*  如果方法的签名指定了返回一个数组（如 int[]），则必须返回该类型的数据。如果直接返回 Stack<Integer>，编译器会报错，因为 Stack<Integer> 与 int[] 是不同的类型。  
+*  例如，如果你的方法签名是`public int[] asteroidCollision(int[] asteroids)`,则必须返回`int[]`,而不能返回`Stack<Integer>`.  
+2. 数据的适当封装  
+* 在很多情况下，方法调用都可能只需要处理结果数组而不需要知道内部你使用了什么数据结构（如‘Stack’）。返回数组比返回‘Stack’更符合信息隐藏的原则，也让调用者更方便使用返回的数据  
+3.标准化接口  
+*  数组是一种更基础的数据结构，使用更广泛。在很多场景中，特别是在API设计中，返回数组通常比返回‘Stack’或其他集合类型更合适，因为数组可以直接在Java代码中使用、操作和遍历，而不需要额外的处理  
+*  比如，数组可以直接用于‘for’循环和‘for each’循环，而‘Stack’需要先进行遍历  
+4.防止外部个性
+* 如果返回‘Stack’对象，外部代码可以直接修改这个‘Stack’，这可能导致未预期的结果或错误，如果转换成数组，外部代码只能读取数据，无法直接修改原来的栈结构，增强了安全性。
+```java
+public int[] asteroidCollision(int[] asteroids) {
+    Stack<Integer> stack = new Stack<>();
+    // ... 处理逻辑
+    // 将 Stack 转换为数组返回
+    return stack.stream().mapToInt(i -> i).toArray();
+}
+```
 
 
 
