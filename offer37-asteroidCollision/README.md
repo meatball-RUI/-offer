@@ -118,7 +118,60 @@ greet.run(); // 输出: Hello, world!
 lambda总结  
 Lambda表达式使Java编程更简洁、表达力更强，尤其是在处理函数式编程任务时。它提供了一种更简洁的方式来创建匿名方法，适用于回调、事件处理、集合操作、流处理等场景。通过Lambda表达式，你可以更方便地使用Java的函数式编程特性，从而提高代码的可读性和可维护性。  
 ### 自动装箱 自动拆箱
+
 ### 为什么不直接返回Stack呢
+自动装箱（Autoboxing） 和 自动拆箱（Unboxing） 是Java语言中的两个重要特性，旨在简化基本数据类型（如int、char、double等）与其对应的封装类（如Integer、Character、Double等）之间的转换。  
+自动装箱（Autoboxing）  
+自动装箱 是指Java编译器自动将基本数据类型转换为其对应的封装类对象的过程。例如，将int类型转换为Integer对象。  
+示例：  
+```java
+int a = 10;
+Integer b = a;  // 自动装箱：int -> Integer
+```
+在这个例子中，a是一个int类型的基本数据类型。当我们将它赋值给Integer类型的变量b时，Java编译器会自动将a装箱为Integer对象。  
+自动拆箱（Unboxing）  
+自动拆箱 是指Java编译器自动将封装类对象转换为其对应的基本数据类型的过程。例如，将Integer对象转换为int类型。   
+示例：  
+```java
+Integer b = 10;  // 自动装箱
+int a = b;       // 自动拆箱：Integer -> int
+```
+在这个例子中，b是一个Integer对象。当我们将它赋值给int类型的变量a时，Java编译器会自动将b拆箱为int类型的值。  
+为什么需要自动装箱和拆箱？  
+在Java中，基本数据类型（如int、char等）效率高，但不能用于对象的场合。例如，集合类（如List、Map等）只能处理对象类型的数据，这时就需要将基本数据类型转换为其对应的封装类类型。自动装箱和拆箱特性使得这些转换更加简洁，无需手动进行显式的转换。  
+自动装箱和拆箱的常见用法  
+1.在集合类中使用：
+* 由于Java的集合类只能存储对象类型，自动装箱允许你直接将基本数据类型添加到集合中。
+```java
+List<Integer> list = new ArrayList<>();
+list.add(10);  // 自动装箱：int -> Integer
+```
+2.在条件判断中使用
+* 自动拆箱使得在比较或运算时，可以直接使用封装类对象，而无需手动转换。
+```java
+Integer a = 100;
+Integer b = 100;
+if (a < b) {  // 自动拆箱：Integer -> int
+    System.out.println("a is less than b");
+}
+```
+3.在数学运算中使用  
+*  自动拆箱允许在数学运算中混合使用基本数据类型和封装类。  
+```java
+Integer a = 5;
+int b = 10;
+int c = a + b;  // 自动拆箱：Integer -> int，然后进行加法运算
+```
+注意事项
+* 性能影响：尽管自动装箱和拆箱简化了代码，但频繁使用可能导致性能问题，因为每次装箱都涉及创建新的对象，拆箱涉及解包操作。
+* NullPointerException风险：在自动拆箱时，如果封装类型对象为null，会抛出NullPointerException。
+```java
+Integer a = null;
+int b = a;  // 抛出 NullPointerException
+```
+总结  
+自动装箱和拆箱大大简化了基本数据类型与对象类型之前的转换，提升了代码的简洁和可读性。然后，在使用时应注意可能的性能问题和‘NullPointerException’的风险
+
 
 
 
