@@ -23,7 +23,10 @@
 3.右半部分的最大矩形面积  
 代码实现：  
 ```java
-
+public class conquerAndDivide{
+//Function to calculate the largest rectangle area in a histogram using divide and conquer
+//调用辅助函数，处理整个数组
+}
 ```
 ### 单调栈法
 
