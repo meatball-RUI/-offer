@@ -6,6 +6,43 @@
 ## 解决方法
 ### 蛮力法
 如果能逐一找出直方图中所有的矩形并比较它们的面积，就能得到最大的矩形面积。下面使用嵌套的二重循环遍历所有矩形，并比较它们的面积，参考代码如下所示
+```java
+package offer39;
+public class Solution1 {
+	// Function to calculate the largest rectangle area in a histogram
+	// 计算直方图中最大矩形面积的函数
+	public int largestRectangleArea(int[] heights) {
+		//Variable to store the maximum area found
+		//用于存储找到的最大面积的变量
+		int maxArea=0;
+		//Outer loop to consider each bar as the left boundary of the rectangle
+		//外层循环，将每个柱子作为矩形的左边界
+		for(int i=0;i<heights.length;i++) {
+			
+			//Initialize the minimum height to the current bar
+			//将最小高度初始化为当前柱子的高度
+			int min=heights[i];
+			
+			//Inner loop to consider each bar from 'i' as the right boundary
+			//内层循环，将从‘i’开始的每个柱子作为右边界
+			for(int j=i;j<heights.length;j++) {
+				//Update the minimum height between the bars from 'i' to 'j'
+				//更新从‘i’到‘j’之间柱子的最小高度
+				min=Math.min(min, heights[j]);
+				//Calculate the area with 'i' as the left boundary and 'j' as the right boundary
+				//计算以‘i’为左边界，‘j’为右边界的矩形面积
+				int area=min*(j-i+1);
+				//Update the maximum area if the current area is larger
+				//如果当前面积最大，则更新最大面积
+				maxArea=Math.max(maxArea, area);
+			}
+		}
+		//Return the maximum area found
+		//返回找到的最大面积
+		return maxArea;
+	}
+}
+```
 
 ### 分治法
 使用分治法(Divide and Conquer)来解决最大矩形面积的问题是一种更高效的算法。分治法的核心思想是将问题递归地分成更小的子问题进行解决，然后将子问题的解组合成原问题的解。   
@@ -23,10 +60,33 @@
 3.右半部分的最大矩形面积  
 代码实现：  
 ```java
-public class conquerAndDivide{
-//Function to calculate the largest rectangle area in a histogram using divide and conquer
-//调用辅助函数，处理整个数组
+package offer39;
+
+public class ConquerAndDivideRUI1{
+	//用来计算矩形最大值的函数
+	public int largestRectangle(int[] heights) {
+		//调用辅助方法用来计算所有范围内的最大矩形面积值
+		return helper(heights,0,heights.length);
+	}
+	//递归辅助函数，用来计算子数组中的最大矩形面积值
+	private int helper(int[] heights, int start, int end) {
+		//遍历数组，找到最小高度的柱子的索引
+		int minIndex=start;
+		for(int i=0;i<heights.length;i++) {
+			if(heights[i]<heights[minIndex]) {
+				minIndex=i;
+			}
+		}
+		//递归计算左半部分最大矩形值
+		int areaMinIndex=minIndex*(start-end+1);
+		//递归计算左半部分最大矩形值
+		int areaLeft=helper(heights,start,minIndex-1);
+		//递归计算右半部分最大矩形值
+		int areaRight=helper(heights,minIndex+1,end);
+		return Math.max(areaMinIndex, Math.max(areaLeft, areaRight));
+	}
 }
+
 ```
 ### 单调栈法
 
