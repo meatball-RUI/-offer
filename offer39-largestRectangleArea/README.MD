@@ -280,6 +280,43 @@ public class MonotonicStackRUI {
 }
 ```
 #### 错题集
+```java
+package offer39;
+
+import java.util.Stack;
+
+public class MonotonicStackRUI {
+	public int largestRectangle(int[] heights) {
+		//创建一个用来存放索引的栈
+		Stack<Integer> index=new Stack<>();
+		//在栈中放入一个元素-1，用来表示栈空时的左边界
+		index.push(-1);
+		//用一个变量来保存最大矩形面积值
+		int maxArea=0;
+		//遍历所有柱子
+		for(int i=0;i<heights.length;i++) {
+			//如果当前栈不为空，且当前柱子高度小于等于栈顶中索引所对应的柱子高度，那么计算以最高柱子为高所对应的最大面积
+			if(index.peek()!=-1&&heights[i]<=heights[index.peek()]) {
+				//确定最高柱子高度
+				int height=heights[index.pop()];
+				//确定宽度,左边界为弹出最高柱子的下一个柱子索引
+				int width=i-index.peek()-1;
+				maxArea=Math.max(maxArea, height*width);
+			}
+			index.push(i);
+		}
+		//处理剩余栈中的柱子
+		while(index.peek()!=-1) {
+			int height=heights[index.pop()];
+			int width=heights.length-index.peek()-1;
+			//更新最大矩形面积
+			maxArea=Math.max(maxArea, height*width);
+		}
+		return maxArea;
+	}
+}
+```
+
 
 
 
