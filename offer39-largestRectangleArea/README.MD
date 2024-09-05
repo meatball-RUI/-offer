@@ -259,7 +259,7 @@ public class MonotonicStackRUI {
 		//遍历所有柱子
 		for(int i=0;i<heights.length;i++) {
 			//如果当前栈不为空，且当前柱子高度小于等于栈顶中索引所对应的柱子高度，那么计算以最高柱子为高所对应的最大面积
-			if(index.peek()!=-1&&heights[i]<=heights[index.peek()]) {
+			while(index.peek()!=-1&&heights[i]<=heights[index.peek()]) {
 				//确定最高柱子高度
 				int height=heights[index.pop()];
 				//确定宽度,左边界为弹出最高柱子的下一个柱子索引
