@@ -5,3 +5,28 @@
 以矩阵中的每行为基线，将矩阵转换成多个直方图  
 <img src="https://github.com/meatball-RUI/DataStructure-and-Algorithm-Offer/blob/main/offer40-maximalRectangle/Screenshot%202024-09-05%20at%2019.30.42.png" width="350px">
 
+### Code
+'''java
+package offer40;
+
+public class Solution {
+	public int maximalRectangle(char[][] matrix) {
+		if(matrix.length==0||matrix[0].length==0) {
+			return 0;
+		}
+		int maxArea=0;
+		int[] heights=new int[matrix[0].length];
+		for(char[] row:matrix) {
+			for(int i=0;i<row.length;i++) {
+				if(row[i]=='0') {
+					heights[i]=0;
+				}else {
+					heights[i]++;
+				}
+			}
+			maxArea=Math.max(maxArea, LargestRectangle.largestRectangle(heights));
+		}
+		return maxArea;
+	}
+}
+'''
