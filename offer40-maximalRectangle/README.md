@@ -6,7 +6,7 @@
 <img src="https://github.com/meatball-RUI/DataStructure-and-Algorithm-Offer/blob/main/offer40-maximalRectangle/Screenshot%202024-09-05%20at%2019.30.42.png" width="350px">
 
 ### Code
-'''java
+```java
 package offer40;
 
 public class Solution {
@@ -29,4 +29,4 @@ public class Solution {
 		return maxArea;
 	}
 }
-'''
+```
