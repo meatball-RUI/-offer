@@ -30,3 +30,10 @@ public class Solution {
 	}
 }
 ```
+### 错题总结
+```java
+if (row[i] == '0') {
+	heights[i] = 0;  // 遇到 '0'，当前柱子的高度重置为 0
+}
+```
+二维数组中存放的char型的数据，不是int型的
