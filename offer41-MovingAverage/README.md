@@ -4,4 +4,11 @@
     当窗口中的元素数量超过指定大小时，移除最早进入窗口的元素。  
 ## 问题描述：
 实现一个能够计算滑动窗口平均值的类。这个类的核心功能是动态接收输入流中的数据，并在窗口大小固定的情况下计算当前窗口内的平均值。
+```java
+class MovingAverage {
+    public MovingAverage(int size) { ... } // 构造函数
+    public double next(int val) { ... }    // 返回滑动窗口的平均值
+}
+```
+
 
