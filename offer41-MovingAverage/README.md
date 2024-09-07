@@ -11,7 +11,7 @@ class MovingAverage {
 }
 ```
 ## Code
-''' java
+```java
 package offer41;
 
 import java.util.LinkedList;
@@ -35,7 +35,7 @@ public class MovingAverageRUI {
 		return (double)sum/window.size();
 	}
 }
-'''
+```
 
 
 
