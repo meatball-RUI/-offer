@@ -49,6 +49,10 @@ public class MovingAverage{
 	}
 }
 ```
+## 时间复杂度
+O（1）
+## 空间复杂度
+O（n），n是capacity的大小
 
 
 
