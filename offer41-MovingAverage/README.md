@@ -53,6 +53,11 @@ public class MovingAverage{
 O（1）
 ## 空间复杂度
 O（n），n是capacity的大小
+## 错题集
+### nums=new LinkedList<>();
+Queue不能直接被new，是接口类，只能通过它的LinkedList来new
+### return (double) sum/nums.size();
+遇到/的时候需要注意将字符类型进行转换，将int型转换成double型
 
 
 
