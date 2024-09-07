@@ -10,5 +10,32 @@ class MovingAverage {
     public double next(int val) { ... }    // 返回滑动窗口的平均值
 }
 ```
+## Code
+‘’‘java
+package offer41;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class MovingAverageRUI {
+	private Queue<Integer> window;
+	private int capacity;
+	private int sum;
+	public MovingAverageRUI(int capacity) {
+		window=new LinkedList<>();
+		this.capacity=capacity;
+		sum=0;
+	}
+	public double next(int val) {
+		window.offer(val);
+		sum+=val;
+		if(window.size()>capacity) {
+			sum-=window.poll();
+		}
+		return (double)sum/window.size();
+	}
+}
+’‘’
+
 
 
