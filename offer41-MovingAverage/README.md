@@ -12,27 +12,40 @@ class MovingAverage {
 ```
 ## Code
 ```java
-package offer41;
+package offer41; 
 
+//导入LinkedList类
 import java.util.LinkedList;
+//导入Queue接口
 import java.util.Queue;
 
-public class MovingAverageRUI {
-	private Queue<Integer> window;
+public class MovingAverage{
+	//用于存储滑动窗口中的元素
+	private Queue<Integer> nums;
+	//窗口的大小
 	private int capacity;
+	//窗口的总和值
 	private int sum;
-	public MovingAverageRUI(int capacity) {
-		window=new LinkedList<>();
-		this.capacity=capacity;
+	
+	//用构造函数初始化元素值
+	public MovingAverage(int size) {
+		nums=new LinkedList<>();
+		capacity=size;
 		sum=0;
 	}
+	//向滑动窗口中加入一个值计算平均值
 	public double next(int val) {
-		window.offer(val);
-		sum+=val;
-		if(window.size()>capacity) {
-			sum-=window.poll();
+		//向滑动窗口中安全地加入一个值
+		nums.offer(val);
+		//sum加上新的值
+		sum += val;
+		//如果滑动窗口超过规定大小
+		if(nums.size()>capacity) {
+			//移除队列中队首元素
+			sum-=nums.poll();
 		}
-		return (double)sum/window.size();
+		//返回平均值
+		return (double) sum/nums.size();
 	}
 }
 ```
