@@ -46,3 +46,4 @@ if(parent.left==null) {
 	queue.offer(newNode);
 	return parent;
 ```
+当parent.left=newNode的时候还不能从queue中移出队列，因为它的父节点还符合能添加子节点的条件
