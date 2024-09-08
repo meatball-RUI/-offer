@@ -36,3 +36,13 @@ public class CBTInserterRUI {
 }
 ```
 ### 我的错误点
+``` java
+if(parent.left==null) {
+	parent.left=newNode;
+}else {
+	parent.right=newNode;
+}
+	queue.poll();
+	queue.offer(newNode);
+	return parent;
+```
