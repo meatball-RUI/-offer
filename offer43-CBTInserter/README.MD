@@ -47,3 +47,4 @@ if(parent.left==null) {
 	return parent;
 ```
 当parent.left=newNode的时候还不能从queue中移出队列，因为它的父节点还符合能添加子节点的条件
+因为它的父节点还符合能添加子节点的条件，所以它的子节点也能加入到queue中，子节点还不符合能添加子节点的条件
