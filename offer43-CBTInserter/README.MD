@@ -1,5 +1,5 @@
 ## 错题集
-```
+``` java
 package offer43;
 
 import java.util.LinkedList;
