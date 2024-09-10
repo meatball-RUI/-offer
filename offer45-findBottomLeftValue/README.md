@@ -32,3 +32,6 @@ public class FindBottomLeftValue {
 	}
 }
 ```
+```java
+这个题目里面已经假设至少会存在一个节点了，所以不用再单独考虑root！=null的情况
+```
