@@ -23,7 +23,49 @@ public class InOrderTraversal {
 ### 问题分析
 进行inOrderTraversal(root.left)还有inOrderTraversal(root.right);递归调用时，虽然遍历了子树，但没有保存这些递归调用的结果，导致最终的结果列表只包含当前节点的值（即result.add(root.val)）,不会包含左右子树的结果。
 #### 解决1:用addAll（）方法
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class InOrderChatGPT {
+	public List<Integer> inOrderTraversal(TreeNode root){
+		List<Integer> result=new ArrayList<>();
+		if(root!=null) {
+			result.addAll(inOrderTraversal(root.left));
+			result.add(root.val);
+			result.addAll(inOrderTraversal(root.right));
+		}
+		return result;
+	}
+}
+```
 #### 解决2:给inOrderTraversal方法加上result的参数进行传递
+```java
+package offer47;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class InOrderTraversalRUI {
+	public List<Integer> inOrderTraversal(TreeNode root){
+		List<Integer> nodes=new LinkedList<>();
+		dfs(root,nodes);
+		return nodes;
+	}
+
+	private void dfs(TreeNode root, List<Integer> nodes) {
+		if(root!=null) {
+			dfs(root.left,nodes);
+			nodes.add(root.val);
+			dfs(root.right,nodes);
+		}
+		
+	}
+	
+}
+```
 #### 解决3:将List<Integer> result=new ArrayList<>(); 声明成类成员变量
 
 
