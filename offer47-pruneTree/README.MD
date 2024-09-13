@@ -22,3 +22,8 @@ public class InOrderTraversal {
 在递归调用时没有将结果正确地传递和汇总到返回的列表中。在递归调用时忽略了将递归调用返回的结果与当前的result列表合并
 ### 问题分析
 进行inOrderTraversal(root.left)还有inOrderTraversal(root.right);递归调用时，虽然遍历了子树，但没有保存这些递归调用的结果，导致最终的结果列表只包含当前节点的值（即result.add(root.val)）,不会包含左右子树的结果。
+#### 解决1:用addAll（）方法
+#### 解决2:给inOrderTraversal方法加上result的参数进行传递
+#### 解决3:将List<Integer> result=new ArrayList<>(); 声明成类成员变量
+
+
