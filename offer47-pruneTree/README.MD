@@ -89,4 +89,62 @@ public class InOrderTraversalRUI {
     }
 }
 ```
+## 错题集2 java.lang.NullPointerException
+报的错
+``` java
+Exception in thread "main" java.lang.NullPointerException: Cannot read field "val" because "root" is null
+	at offer47.PreOrderTraversal.bfs(PreOrderTraversal.java:15)
+	at offer47.PreOrderTraversal.bfs(PreOrderTraversal.java:16)
+	at offer47.PreOrderTraversal.bfs(PreOrderTraversal.java:16)
+	at offer47.PreOrderTraversal.bfs(PreOrderTraversal.java:16)
+	at offer47.PreOrderTraversal.preOrderTraversal(PreOrderTraversal.java:10)
+	at offer47.Main.main(Main.java:25)
+```
+code
+``` java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class PreOrderTraversal {
+	public List<Integer> preOrderTraversal(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		bfs(root,result);
+		return result;
+	}
+
+	private void bfs(TreeNode root, List<Integer> result) {
+		result.add(root.val);
+		bfs(root.left,result);
+		bfs(root.right,result);
+	}
+}
+```
+啊，吃屎了，基条件都没加
+### 解决：加上基条件if(root!=null)
+``` java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class PreOrderTraversal {
+	public List<Integer> preOrderTraversal(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		bfs(root,result);
+		return result;
+	}
+
+	private void bfs(TreeNode root, List<Integer> result) {
+		if(root!=null) {
+			result.add(root.val);
+			bfs(root.left,result);
+			bfs(root.right,result);
+		}
+	}
+}
+```
 
