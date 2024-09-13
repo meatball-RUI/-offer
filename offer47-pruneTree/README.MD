@@ -67,5 +67,26 @@ public class InOrderTraversalRUI {
 }
 ```
 #### 解决3:将List<Integer> result=new ArrayList<>(); 声明成类成员变量
+``` java
+import java.util.LinkedList;
+import java.util.List;
 
+public class InOrderTraversalRUI {
+    private List<Integer> nodes;  // 将 nodes 声明为类成员变量
+
+    public List<Integer> inOrderTraversal(TreeNode root) {
+        nodes = new LinkedList<>();
+        dfs(root);
+        return nodes;
+    }
+
+    private void dfs(TreeNode root) {
+        if (root != null) {
+            dfs(root.left);
+            nodes.add(root.val);
+            dfs(root.right);
+        }
+    }
+}
+```
 
