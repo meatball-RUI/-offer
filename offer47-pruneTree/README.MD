@@ -211,3 +211,129 @@ public class InOrderChatGPT {
 	}
 }
 ```
+### 中序遍历Stack实现
+package offer47;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+public class InOrderStack {
+	public List<Integer> inorderTraversal(TreeNode root) {
+		List<Integer> result=new LinkedList<>();
+		Stack<TreeNode> stack=new Stack<>();
+		TreeNode cur=root;
+		while(cur!=null||!stack.isEmpty()) {
+			//先沿着左子树一直迭代一直到叶子节点
+			while(cur!=null) {
+				stack.push(cur);
+				cur=cur.left;
+			}
+//			将叶子节点弹出
+			TreeNode node=stack.pop();
+//          将当前根节点加入到list中
+			result.add(node.val);
+//			访问当前根节点的右子节点
+			cur=node.right;
+		}
+		return result;
+	}
+}
+## 后序遍历3种递归实现及stack
+### 后序遍历递归1
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class PostOrderTraversal {
+	public List<Integer> postOrderTraversal(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		bfs(root,result);
+		return result;
+	}
+
+	private void bfs(TreeNode root,List<Integer> result) {
+		if(root!=null) {
+			bfs(root.left,result);
+			bfs(root.right,result);
+			result.add(root.val);
+		}
+	}
+}
+```
+### 后序遍历递归2
+```java
+package offer47;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class PostOrderChatGPT {
+	List<Integer> postOrderChatGPT(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		if(root!=null) {
+			result.addAll(postOrderChatGPT(root.left));
+			result.addAll(postOrderChatGPT(root.right));
+			result.add(root.val);
+		}
+		return result;
+	}
+}
+```
+### 后序遍历递归3
+```java
+package offer47;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class PostOrderRUI {
+	List<Integer> result=new LinkedList<>();
+	public List<Integer> postOrderRUI(TreeNode root){
+		if(root!=null) {
+			postOrderRUI(root.left);
+			postOrderRUI(root.right);
+			result.add(root.val);
+		}
+		return result;
+	}
+}
+```
+### 后序遍历Stack
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class PostOrderStack {
+	public List<Integer> postOrderStack(TreeNode root){
+		List<Integer> result=new ArrayList<>();
+		Stack<TreeNode> stack1=new Stack<>();
+		Stack<TreeNode> stack2=new Stack<>();
+		if(root==null) {
+			return result;
+		}
+		stack1.push(root);
+		while(!stack1.isEmpty()) {
+			TreeNode node=stack1.pop();
+			stack2.push(node);
+			if(node.left!=null) {
+				stack1.push(node.left);
+			}
+			if(node.right!=null) {
+				stack1.push(node.right);
+			}
+		}
+		while(!stack2.isEmpty()) {
+			result.add(stack2.pop().val);
+		}
+		return result;
+	}
+}
+```
+
