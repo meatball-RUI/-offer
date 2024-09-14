@@ -336,4 +336,104 @@ public class PostOrderStack {
 	}
 }
 ```
+## 前序遍历的三种递归及stack实现
+### 前序遍历递归1
+```java
+package offer47;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+public class PreOrderTraversal {
+	public List<Integer> preOrderTraversal(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		bfs(root,result);
+		return result;
+	}
+
+	private void bfs(TreeNode root, List<Integer> result) {
+		if(root!=null) {
+			result.add(root.val);
+			bfs(root.left,result);
+			bfs(root.right,result);
+		}
+	}
+}
+```
+### 前序遍历递归2
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PreOrderTraversalRUI {
+	private List<Integer> result=new ArrayList<>();
+	public List<Integer> preOrderTraversal(TreeNode root) {
+		if(root!=null) {
+			result.add(root.val);
+			preOrderTraversal(root.left);
+			preOrderTraversal(root.right);
+		}
+		return result;
+	}
+}
+```
+### 前序遍历递归3
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+public class PreOrderStackChatGPT {
+	public List<Integer> preOrderStackChatGPT(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		Stack<TreeNode> stack=new Stack<>();
+		if(root!=null) {
+			stack.push(root);
+		}
+		while(!stack.isEmpty()) {
+			TreeNode node=stack.pop();
+			result.add(node.val);
+			if(node.right!=null) {
+				stack.push(node.right);
+			}
+			if(node.left!=null) {
+				stack.push(node.left);
+			}
+		}
+		return result;
+	}
+}
+```
+### 前序遍历stack
+```java
+package offer47;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+
+public class PreOrderStack {
+	public List<Integer> preOrderTraversal(TreeNode root){
+		List<Integer> result=new LinkedList<>();
+		Stack<TreeNode> stack=new Stack<>();
+		stack.add(root);
+		while(!stack.isEmpty()) {
+			TreeNode node=stack.pop();
+			result.add(node.val);
+			if(node.right!=null) {
+				stack.push(node.right);
+			}
+			if(node.left!=null) {
+				stack.push(node.left);
+			}
+		}
+		return result;
+	}
+}
+```
