@@ -169,6 +169,45 @@ public class InOrderTraversal {
 ```
 ### 中序遍历递归2
 ```java
+package offer47;
 
+import java.util.LinkedList;
+import java.util.List;
+
+public class InOrderTraversalRUI {
+	public List<Integer> inOrderTraversal(TreeNode root){
+		List<Integer> nodes=new LinkedList<>();
+		dfs(root,nodes);
+		return nodes;
+	}
+
+	private void dfs(TreeNode root, List<Integer> nodes) {
+		if(root!=null) {
+			dfs(root.left,nodes);
+			nodes.add(root.val);
+			dfs(root.right,nodes);
+		}
+		
+	}
+	
+}
 ```
 ### 中序遍历递归3
+```java
+package offer47;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class InOrderChatGPT {
+	public List<Integer> inOrderTraversal(TreeNode root){
+		List<Integer> result=new ArrayList<>();
+		if(root!=null) {
+			result.addAll(inOrderTraversal(root.left));
+			result.add(root.val);
+			result.addAll(inOrderTraversal(root.right));
+		}
+		return result;
+	}
+}
+```
