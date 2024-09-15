@@ -12,8 +12,8 @@ public class PruneTree {
 		//递归修剪左子树，将修剪后的结果赋值给当前节点的左子树
 		root.left=pruneTree(root.left);
 		//递归修剪右子树，将修剪后的结果赋值给当前节点的右子树
-	    root.right=pruneTree(root.right);
-	    //如果当前节点的左子树和右子树都为空，且当前节点的值为0，则删除该节点（返回null）
+	        root.right=pruneTree(root.right);
+	        //如果当前节点的左子树和右子树都为空，且当前节点的值为0，则删除该节点（返回null）
 		if(root.left==null&&root.right==null&&root.val==0) {
 			return null;
 		}
