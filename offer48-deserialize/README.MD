@@ -6,5 +6,8 @@
 <img src="https://github.com/meatball-RUI/DataStructure-and-Algorithm-Offer/blob/main/offer48-deserialize/Screenshot%202024-09-15%20at%2017.07.29.png" width=400px />
 
 ### 难点解决
+说明:(a)序列化成字符串“6，6，6，#，#，6，#，#，6，#，#”的二叉树；（b）序列化成字符串“6，6，#，#，6，6，#，#，6，#，#”的二叉树  
+
 ```java
+
 ```
