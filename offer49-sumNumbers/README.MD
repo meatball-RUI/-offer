@@ -14,7 +14,6 @@ public class TreeNode {
 	}
 }
 ```
-## code
 ```java
 package offer49;
 
