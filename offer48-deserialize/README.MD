@@ -12,16 +12,86 @@
 ## Code
 ### TreeNode
 ```java
+package offer48;
+
+public class TreeNode {
+	TreeNode left;
+	TreeNode right;
+	int val;
+	public TreeNode(int val) {
+		this.val=val;
+	}
+}
 ```
 ### Serialize
 ```java
+package offer48;
+
+public class Serialize {
+	public String serialize(TreeNode root) {
+		if(root==null) {
+			return "#";
+		}
+		String leftStr=serialize(root.left);
+		String rightStr=serialize(root.right);
+		return String.valueOf(root.val)+","+leftStr+","+rightStr;
+	}
+}
 ```
 ### DeSerialize
 ```java
+package offer48;
+
+public class DeSerialize {
+	public TreeNode deSerialize(String str) {
+		String[] strs=str.split(",");
+		int[] i= {0};
+		return dfs(strs,i);
+	}
+
+	private TreeNode dfs(String[] strs, int[] i) {
+		String str=strs[i[0]];
+		i[0]++;
+		if(str.equals("#")) {
+			return null;
+		}
+		TreeNode node=new TreeNode(Integer.valueOf(str));
+		node.left=dfs(strs,i);
+		node.right=dfs(strs,i);
+		return node;
+	}
+}
 ```
 ### main
 序列化成字符串后，反序列化构建二叉树，然后再序列成字符串
-
 ```java
+package offer48;
 
+public class Main {
+	public static void main(String[] args) {
+		TreeNode node1=new TreeNode(1);
+		TreeNode node2=new TreeNode(2);
+		TreeNode node3=new TreeNode(3);
+		TreeNode node4=new TreeNode(4);
+		TreeNode node5=new TreeNode(5);
+		node1.left=node2;
+		node1.right=node3;
+		node2.left=node4;
+		node2.right=node5;
+		Serialize s=new Serialize();
+		String str=s.serialize(node1);
+		System.out.print(str);
+		System.out.println();
+		DeSerialize des=new DeSerialize();
+		TreeNode node=des.deSerialize(str);
+		Serialize s1=new Serialize();
+		String str1=s1.serialize(node);
+		System.out.print(str1);
+	}
+}
+```
+### 执行结果
+``` java
+1,2,4,#,#,5,#,#,3,#,#
+1,2,4,#,#,5,#,#,3,#,#
 ```
