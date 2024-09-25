@@ -18,27 +18,29 @@ package offer53;
 
 import java.util.Stack;
 
-public class InorderSuccessorStack {
-	public TreeNode inorderSuccessorStack(TreeNode root,TreeNode p) {
+public class InorderSuccessorStackOffer {
+	public TreeNode inorderSuccessorStackOffer(TreeNode root,TreeNode p) {
 		Stack<TreeNode> stack=new Stack<>();
+		boolean found=false;
 		TreeNode cur=root;
-		if(root==null) {
-			return null;
-		}
-		while(!stack.isEmpty()||cur!=null) {
+		while(cur!=null||!stack.isEmpty()) {
 			while(cur!=null) {
 				stack.push(cur);
 				cur=cur.left;
 			}
-			cur=stack.pop();
-			if(cur==p) {
-				break;
-			}
-			cur=cur.right;
 		}
-		return cur.right;
+		TreeNode node=stack.pop();
+		if(found) {
+			return cur;
+		}
+		if(cur==p) {
+			found=true;
+		}
+		cur=cur.right;
+		return null;
 	}
 }
+
 ```
 ## InorderSuccessorRecursion解法
 ```java
