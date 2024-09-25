@@ -12,7 +12,9 @@ public class TreeNode {
 	}
 }
 ```
-## InorderSuccessorStack 解法
+## 时间复杂度O（n），空间复杂度O（h）的解法  
+思路：先找到目标节点p，然后确定按中序排序的后继节点
+### InorderSuccessorStack 解法
 ```java
 package offer53;
 
@@ -42,7 +44,7 @@ public class InorderSuccessorStackOffer {
 }
 
 ```
-## InorderSuccessorRecursion解法
+### InorderSuccessorRecursion解法
 ```java
 package offer53;
 
@@ -74,7 +76,7 @@ public class InorderSuccessorRecursion {
 	}
 }
 ```
-## Main
+### Main
 ```java
 package offer53;
 
@@ -102,3 +104,5 @@ public class Main {
 	}
 }
 ```
+## 时间复杂度O（h), 空间复杂度O（1）的解法
+思路：将遍历的节点与目标节点相比较，后继节点比目标节点大（如果遍历的节点小，往右子树走），又是比目标节点大的节点中的最小的节点（找到比目标节点大的节点之后，再往左子节点走，直到找到比目标节点大的节点中的最小的节点）
